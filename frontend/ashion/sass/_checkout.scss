@@ -84,7 +84,7 @@
 
         &:checked {
 
-          &~.checkmark {
+          & ~ .checkmark {
             border-color: $primary-color;
 
             &:after {
@@ -229,7 +229,7 @@
 
         & ~ .checkmark {
           border-color: $primary-color;
-  
+
           &:after {
             border-color: $primary-color;
             opacity: 1;

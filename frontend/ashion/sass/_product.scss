@@ -9,7 +9,7 @@
 .filter__controls {
   text-align: right;
   margin-bottom: 50px;
-  
+
   li {
     font-size: 14px;
     list-style: none;
@@ -27,14 +27,14 @@
     }
 
     &:after {
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        height: 2px;
-        width: 100%;
-        background: $primary-color;
-        content: "";
-        opacity: 0;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      height: 2px;
+      width: 100%;
+      background: $primary-color;
+      content: "";
+      opacity: 0;
     }
 
     &:last-child {
@@ -88,7 +88,7 @@
     position: absolute;
     left: 10px;
     top: 10px;
-    
+
     &.new {
       background: #36a300;
     }
@@ -98,7 +98,7 @@
     }
 
     &.stockblue {
-      background: #0066bd!important;
+      background: #0066bd !important;
     }
 
     &.sale {
@@ -113,7 +113,7 @@
   width: 100%;
   bottom: 30px;
   text-align: center;
-  
+
   li {
     list-style: none;
     display: inline-block;
@@ -121,12 +121,15 @@
     position: relative;
     top: 100px;
     opacity: 0;
+
     &:nth-child(1) {
       @include transition(all 0.4s ease 0.1s);
     }
+
     &:nth-child(2) {
       @include transition(all 0.4s ease 0.15s);
     }
+
     &:nth-child(3) {
       @include transition(all 0.4s ease 0.2s);
     }
@@ -139,7 +142,7 @@
 
       a {
         background: $primary-color;
-        
+
         span {
           color: $white-color;
           -webkit-transform: rotate(360deg);
@@ -176,7 +179,7 @@
   padding-top: 22px;
 
   h6 {
-    
+
     a {
       font-size: 14px;
       color: $heading-color;
@@ -197,6 +200,7 @@
       }
     }
   }
+
   .product__price {
     color: $heading-color;
     font-weight: 600;
