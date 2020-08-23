@@ -1,11 +1,9 @@
 package com.example.fileshare.controller;
 
-import com.example.fileshare.model.File;
-import com.example.fileshare.model.User;
+import com.example.fileshare.model.Product;
 import com.example.fileshare.repository.UserRepository;
-import com.example.fileshare.service.FileService;
+import com.example.fileshare.service.ProductService;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,30 +15,23 @@ import java.util.List;
 @CrossOrigin
 public class IndexController {
 
-    private final FileService fileService;
+    private final ProductService productService;
 
     private final UserRepository userRepository;
 
-    public IndexController(FileService fileService, UserRepository userRepository) {
-        this.fileService = fileService;
+    public IndexController(ProductService productService, UserRepository userRepository) {
+        this.productService = productService;
         this.userRepository = userRepository;
     }
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public String listAll(Model model, @RequestParam(value = "parentId", required = false) Integer parentId){
-        System.out.println("listAll user:" + SecurityContextHolder.getContext().getAuthentication().getName());
-        User user = userRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    public String listAll(Model model){
 
-        List<File> files = new ArrayList<>();
-        if(parentId != null){
-            File parent = fileService.findFileById(parentId);
-            files.addAll(fileService.findFiles(user, parent));
-        }
-        else{
-            files.addAll(fileService.findRootFiles(user));
-        }
-        model.addAttribute("files",files);
+        List<Product> productList = this.productService.findAllProducts();
+        model.addAttribute("products",productList);
+
+
         return "index";
     }
 

@@ -15,14 +15,14 @@
           rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
 </head>
 
 <body>
@@ -45,7 +45,7 @@
         </a></li>
     </ul>
     <div class="offcanvas__logo">
-        <a href="./index.jsp"><img src="img/logo.png" alt=""></a>
+        <a href="./index.jsp"><img src="resources/img/logo.png" alt=""></a>
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-xl-3 col-lg-2">
                 <div class="header__logo">
-                    <a href="./index.jsp"><img src="img/logo.png" alt=""></a>
+                    <a href="./index.jsp"><img src="resources/img/logo.png" alt=""></a>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-7">
@@ -133,27 +133,27 @@
                 <div class="product__details__pic">
                     <div class="product__details__pic__left product__thumb nice-scroll">
                         <a class="pt active" href="#product-1">
-                            <img src="img/product/details/thumb-1.jpg" alt="">
+                            <img src="resources/img/product/details/thumb-1.jpg" alt="">
                         </a>
                         <a class="pt" href="#product-2">
-                            <img src="img/product/details/thumb-2.jpg" alt="">
+                            <img src="resources/img/product/details/thumb-2.jpg" alt="">
                         </a>
                         <a class="pt" href="#product-3">
-                            <img src="img/product/details/thumb-3.jpg" alt="">
+                            <img src="resources/img/product/details/thumb-3.jpg" alt="">
                         </a>
                         <a class="pt" href="#product-4">
-                            <img src="img/product/details/thumb-4.jpg" alt="">
+                            <img src="resources/img/product/details/thumb-4.jpg" alt="">
                         </a>
                     </div>
                     <div class="product__details__slider__content">
                         <div class="product__details__pic__slider owl-carousel">
-                            <img data-hash="product-1" class="product__big__img" src="img/product/details/product-1.jpg"
+                            <img data-hash="product-1" class="product__big__img" src="resources/img/product/details/product-1.jpg"
                                  alt="">
-                            <img data-hash="product-2" class="product__big__img" src="img/product/details/product-3.jpg"
+                            <img data-hash="product-2" class="product__big__img" src="resources/img/product/details/product-3.jpg"
                                  alt="">
-                            <img data-hash="product-3" class="product__big__img" src="img/product/details/product-2.jpg"
+                            <img data-hash="product-3" class="product__big__img" src="resources/img/product/details/product-2.jpg"
                                  alt="">
-                            <img data-hash="product-4" class="product__big__img" src="img/product/details/product-4.jpg"
+                            <img data-hash="product-4" class="product__big__img" src="resources/img/product/details/product-4.jpg"
                                  alt="">
                         </div>
                     </div>
@@ -309,10 +309,10 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-1.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="resources/img/product/related/rp-1.jpg">
                         <div class="label new">New</div>
                         <ul class="product__hover">
-                            <li><a href="img/product/related/rp-1.jpg" class="image-popup"><span
+                            <li><a href="resources/img/product/related/rp-1.jpg" class="image-popup"><span
                                     class="arrow_expand"></span></a></li>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                             <li><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -333,9 +333,9 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-2.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="resources/img/product/related/rp-2.jpg">
                         <ul class="product__hover">
-                            <li><a href="img/product/related/rp-2.jpg" class="image-popup"><span
+                            <li><a href="resources/img/product/related/rp-2.jpg" class="image-popup"><span
                                     class="arrow_expand"></span></a></li>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                             <li><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -356,10 +356,10 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-3.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="resources/img/product/related/rp-3.jpg">
                         <div class="label stockout">out of stock</div>
                         <ul class="product__hover">
-                            <li><a href="img/product/related/rp-3.jpg" class="image-popup"><span
+                            <li><a href="resources/img/product/related/rp-3.jpg" class="image-popup"><span
                                     class="arrow_expand"></span></a></li>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                             <li><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -380,9 +380,9 @@
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
-                    <div class="product__item__pic set-bg" data-setbg="img/product/related/rp-4.jpg">
+                    <div class="product__item__pic set-bg" data-setbg="resources/img/product/related/rp-4.jpg">
                         <ul class="product__hover">
-                            <li><a href="img/product/related/rp-4.jpg" class="image-popup"><span
+                            <li><a href="resources/img/product/related/rp-4.jpg" class="image-popup"><span
                                     class="arrow_expand"></span></a></li>
                             <li><a href="#"><span class="icon_heart_alt"></span></a></li>
                             <li><a href="#"><span class="icon_bag_alt"></span></a></li>
@@ -411,7 +411,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
+                <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-1.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -419,7 +419,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
+                <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-2.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -427,7 +427,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
+                <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-3.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -435,7 +435,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
+                <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-4.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -443,7 +443,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
+                <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-5.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -451,7 +451,7 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-4 col-sm-4 p-0">
-                <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
+                <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-6.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
                         <a href="#">@ ashion_shop</a>
@@ -470,16 +470,16 @@
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.jsp"><img src="img/logo.png" alt=""></a>
+                        <a href="./index.jsp"><img src="resources/img/logo.png" alt=""></a>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                         cilisis.</p>
                     <div class="footer__payment">
-                        <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
-                        <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                        <a href="#"><img src="resources/img/payment/payment-1.png" alt=""></a>
+                        <a href="#"><img src="resources/img/payment/payment-2.png" alt=""></a>
+                        <a href="#"><img src="resources/img/payment/payment-3.png" alt=""></a>
+                        <a href="#"><img src="resources/img/payment/payment-4.png" alt=""></a>
+                        <a href="#"><img src="resources/img/payment/payment-5.png" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -550,16 +550,16 @@
 <!-- Search End -->
 
 <!-- Js Plugins -->
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/jquery-ui.min.js"></script>
-<script src="js/mixitup.min.js"></script>
-<script src="js/jquery.countdown.min.js"></script>
-<script src="js/jquery.slicknav.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.nicescroll.min.js"></script>
-<script src="js/main.js"></script>
+<script src="resources/js/jquery-3.3.1.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery.magnific-popup.min.js"></script>
+<script src="resources/js/jquery-ui.min.js"></script>
+<script src="resources/js/mixitup.min.js"></script>
+<script src="resources/js/jquery.countdown.min.js"></script>
+<script src="resources/js/jquery.slicknav.js"></script>
+<script src="resources/js/owl.carousel.min.js"></script>
+<script src="resources/js/jquery.nicescroll.min.js"></script>
+<script src="resources/js/main.js"></script>
 </body>
 
 </html>
