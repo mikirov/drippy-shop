@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en-GB">
 
@@ -49,8 +50,19 @@
     </div>
     <div id="mobile-menu-wrap"></div>
     <div class="offcanvas__auth">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
+        <c:choose>
+            <c:when test="${pageContext.request.userPrincipal.name != null}">
+                <form id="logoutForm" method="POST" action="/logout">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>
+                <p>Welcome ${pageContext.request.userPrincipal.name}</p>>
+                <a onclick="document.forms['logoutForm'].submit()">Logout</a>
+            </c:when>
+            <c:otherwise>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 <!-- Offcanvas Menu End -->
@@ -87,8 +99,19 @@
             <div class="col-lg-3">
                 <div class="header__right">
                     <div class="header__right__auth">
-                        <a href="/login">Login</a>
-                        <a href="/register">Register</a>
+                        <c:choose>
+                            <c:when test="${pageContext.request.userPrincipal.name != null}">
+                                <form id="logoutForm" method="POST" action="/logout">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </form>
+                                <p>Welcome ${pageContext.request.userPrincipal.name}</p>>
+                                <a onclick="document.forms['logoutForm'].submit()">Logout</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/login">Login</a>
+                                <a href="/register">Register</a>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <ul class="header__right__widget">
                         <li><span class="icon_search search-switch"></span></li>
@@ -119,8 +142,9 @@
                     <div class="categories__text">
                         <h1>Women’s fashion</h1>
 <%--                        TODO: write some meaningful text--%>
-                        <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
-                            edolore magna aliquapendisse ultrices gravida.</p>
+<%--                        <p>Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore--%>
+<%--                            edolore magna aliquapendisse ultrices gravida.</p>--%>
+                        <p>${womenProductsCount} items</p>
                         <a href="/shop/women">Shop now</a>
                     </div>
                 </div>
@@ -131,7 +155,8 @@
                         <div class="categories__item set-bg" data-setbg="resources/img/categories/category-2.jpg">
                             <div class="categories__text">
                                 <h4>Men’s fashion</h4>
-                                <p>358 items</p>
+
+                                <p>${menProductsCount} items</p>
                                 <a href="/shop/men">Shop now</a>
                             </div>
                         </div>
@@ -140,7 +165,7 @@
                         <div class="categories__item set-bg" data-setbg="resources/img/categories/category-5.jpg">
                             <div class="categories__text">
                                 <h4>Accessories</h4>
-                                <p>792 items</p>
+                                <p>${accessoriesCount} items</p>
                                 <a href="/shop/accessories">Shop now</a>
                             </div>
                         </div>
@@ -651,6 +676,7 @@
 </section>
 <!-- Services Section End -->
 
+
 <!-- Instagram Begin -->
 <div class="instagram">
     <div class="container-fluid">
@@ -659,7 +685,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-1.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CEKBxM-JZCv/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -667,7 +693,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-2.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CEE9QiTJY0F/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -675,7 +701,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-3.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CECnNSEJ8rA/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -683,7 +709,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-4.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CECdMAwJ1Y5/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -691,7 +717,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-5.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CECgYo9Jwts/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -699,14 +725,13 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-6.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CEAmIE6JdSw/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Instagram End -->
 
 <!-- Footer Section Begin -->
 <footer class="footer">
@@ -717,8 +742,7 @@
                     <div class="footer__logo">
                         <a href="./index.jsp"><img src="resources/img/logo.png" alt=""></a>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
+                    <p>New and used vintage drip teenage clothes.</p>
                     <div class="footer__payment">
                         <a href="#"><img src="resources/img/payment/payment-1.png" alt=""></a>
                         <a href="#"><img src="resources/img/payment/payment-2.png" alt=""></a>
@@ -732,9 +756,9 @@
                 <div class="footer__widget">
                     <h6>Quick links</h6>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
+<%--                        <li><a href="#">About</a></li>--%>
+                        <li><a href="/contact">Contact</a></li>
+<%--                        <li><a href="#">FAQ</a></li>--%>
                     </ul>
                 </div>
             </div>
@@ -744,7 +768,8 @@
                     <ul>
                         <li><a href="#">My Account</a></li>
                         <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
+                        <li><a href="/checkout">Checkout</a></li>
+<%--                        TODO: load liked products--%>
                         <li><a href="#">Wishlist</a></li>
                     </ul>
                 </div>
@@ -757,10 +782,10 @@
                         <button type="submit" class="site-btn">Subscribe</button>
                     </form>
                     <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/drippyshopbg"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
                         <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/drippy.shop/"><i class="fa fa-instagram"></i></a>
                         <a href="#"><i class="fa fa-pinterest"></i></a>
                     </div>
                 </div>

@@ -15,6 +15,8 @@ public class User {
 
     private String username;
 
+    private String email;
+
     private String password;
 
     public boolean isEnabled() {
@@ -30,6 +32,13 @@ public class User {
     @Transient
     private String passwordConfirm;
 
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Product> products;
+
     @ManyToMany
     private Set<Role> roles;
 
@@ -39,6 +48,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {

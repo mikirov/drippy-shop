@@ -76,6 +76,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Integer countProductsByCategory(Category category) {
+        return productRepository.countProductsByCategory(category);
+    }
+
+    @Override
     public Product findProductById(int id) {
         return productRepository.findProductById(id);
     }

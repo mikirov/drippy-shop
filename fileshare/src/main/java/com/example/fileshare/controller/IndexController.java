@@ -1,5 +1,6 @@
 package com.example.fileshare.controller;
 
+import com.example.fileshare.model.Category;
 import com.example.fileshare.model.Product;
 import com.example.fileshare.repository.UserRepository;
 import com.example.fileshare.service.ProductService;
@@ -31,6 +32,9 @@ public class IndexController {
         List<Product> productList = this.productService.findAllProducts();
         model.addAttribute("products",productList);
 
+        model.addAttribute("menProductsCount", productService.countProductsByCategory(Category.MEN));
+        model.addAttribute("womenProductsCount", productService.countProductsByCategory(Category.WOMEN));
+        model.addAttribute("accessoriesCount", productService.countProductsByCategory(Category.ACCESSORIES));
 
         return "index";
     }

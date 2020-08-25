@@ -25,6 +25,8 @@ public interface ProductService {
 
     List<Product> findProductsByCategoryAndSubCategory(Category category, SubCategory subCategory);
 
+    Integer countProductsByCategory(Category category);
+
     Product findProductById(int id);
 
 }

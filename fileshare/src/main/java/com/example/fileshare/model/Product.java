@@ -43,6 +43,9 @@ public class Product {
     @Enumerated(EnumType.ORDINAL)
     private SubCategory subCategory;
 
+    @Column
+    private Integer quantity;
+
     @ElementCollection
     @CollectionTable(name="imageUrls")
     private List<String> imageUrls = new ArrayList<>();
@@ -51,6 +54,14 @@ public class Product {
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     public User author;
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     public SubCategory getSubCategory() {
         return subCategory;

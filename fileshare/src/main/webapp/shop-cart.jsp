@@ -283,7 +283,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-1.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CEKBxM-JZCv/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -291,7 +291,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-2.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CEE9QiTJY0F/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -299,7 +299,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-3.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CECnNSEJ8rA/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -307,7 +307,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-4.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CECdMAwJ1Y5/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -315,7 +315,7 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-5.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CECgYo9Jwts/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
@@ -323,15 +323,13 @@
                 <div class="instagram__item set-bg" data-setbg="resources/img/instagram/insta-6.jpg">
                     <div class="instagram__text">
                         <i class="fa fa-instagram"></i>
-                        <a href="#">@ ashion_shop</a>
+                        <a href="https://www.instagram.com/p/CEAmIE6JdSw/">@drippy.shop</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Instagram End -->
-
 <!-- Footer Section Begin -->
 <footer class="footer">
     <div class="container">
@@ -341,8 +339,7 @@
                     <div class="footer__logo">
                         <a href="./index.jsp"><img src="resources/img/logo.png" alt=""></a>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        cilisis.</p>
+                    <p>New and used vintage drip teenage clothes.</p>
                     <div class="footer__payment">
                         <a href="#"><img src="resources/img/payment/payment-1.png" alt=""></a>
                         <a href="#"><img src="resources/img/payment/payment-2.png" alt=""></a>
@@ -356,10 +353,9 @@
                 <div class="footer__widget">
                     <h6>Quick links</h6>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <%--                        <li><a href="#">About</a></li>--%>
+                        <li><a href="/contact">Contact</a></li>
+                        <%--                        <li><a href="#">FAQ</a></li>--%>
                     </ul>
                 </div>
             </div>
@@ -369,7 +365,8 @@
                     <ul>
                         <li><a href="#">My Account</a></li>
                         <li><a href="#">Orders Tracking</a></li>
-                        <li><a href="#">Checkout</a></li>
+                        <li><a href="/checkout">Checkout</a></li>
+                        <%--                        TODO: load liked products--%>
                         <li><a href="#">Wishlist</a></li>
                     </ul>
                 </div>
@@ -382,10 +379,10 @@
                         <button type="submit" class="site-btn">Subscribe</button>
                     </form>
                     <div class="footer__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/drippyshopbg"><i class="fa fa-facebook"></i></a>
                         <a href="#"><i class="fa fa-twitter"></i></a>
                         <a href="#"><i class="fa fa-youtube-play"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/drippy.shop/"><i class="fa fa-instagram"></i></a>
                         <a href="#"><i class="fa fa-pinterest"></i></a>
                     </div>
                 </div>
@@ -406,7 +403,6 @@
     </div>
 </footer>
 <!-- Footer Section End -->
-
 <!-- Search Begin -->
 <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
