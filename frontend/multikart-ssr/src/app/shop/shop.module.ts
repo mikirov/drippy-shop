@@ -28,9 +28,7 @@ import { PriceComponent } from './collection/widgets/price/price.component';
 
 import { CartComponent } from './cart/cart.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
-import { CompareComponent } from './compare/compare.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { SuccessComponent } from './checkout/success/success.component';
+import { CompareComponent } from './compare/compare.component'
 
 @NgModule({
   declarations: [
@@ -50,8 +48,6 @@ import { SuccessComponent } from './checkout/success/success.component';
     CartComponent,
     WishlistComponent,
     CompareComponent,
-    CheckoutComponent,
-    SuccessComponent
   ],
   imports: [
     CommonModule,

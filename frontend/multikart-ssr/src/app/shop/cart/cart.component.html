@@ -23,12 +23,12 @@
                 <tbody *ngFor="let product of products">
                     <tr>
                         <td>
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+                            <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
                                 <img [src]="product.images[0].src" [alt]="product.images[0].alt">
                             </a>
                         </td>
                         <td>
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">{{ product.title | titlecase }}</a>
+                            <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">{{ product.name | titlecase }}</a>
                             <div class="mobile-cart-content row">
                                 <div class="col-xs-3">
                                     <div class="qty-box">

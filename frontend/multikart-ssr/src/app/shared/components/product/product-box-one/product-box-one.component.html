@@ -5,23 +5,23 @@
       <span class="lable4" *ngIf="product.sale">on sale</span>
     </div>
     <div class="front">
-      <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+      <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
         <img 
           [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
-          [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src" 
+          [lazyLoad]="ImageSrc ? ImageSrc : product.urls[0]"
           class="img-fluid lazy-loading" 
-          alt="{{ product.images[0].alt }}" />
+          alt="" />
       </a>
     </div>
     <div class="back" *ngIf="onHowerChangeImage">
-      <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-        <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}">
+      <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
+        <img [src]="ImageSrc ? ImageSrc : product.urls[1]" class="img-fluid lazy-loading" alt="">
       </a>
     </div>
     <ul class="product-thumb-list" *ngIf="thumbnail">
-      <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.images">
+      <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.urls">
         <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.src)">
-          <img [lazyLoad]="image.src">
+          <img [lazyLoad]="image">
         </a>
       </li>
     </ul>
@@ -48,8 +48,8 @@
   <div class="product-detail">
     <div>
       <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-      <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
-        <h6>{{ product?.title | titlecase }}</h6>
+      <a [routerLink]="['/shop/product/left/sidebar/', product?.name.replace(' ', '-')]">
+        <h6>{{ product?.name | titlecase }}</h6>
       </a>
       <p>{{ product?.description }}</p>
       <h4>

@@ -1,0 +1,41 @@
+<div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+    <ngx-dropzone
+            style="align-self: flex-start; min-width: 300px;width: 100%;"
+            (filesDropped)="onSelectFile($event)"
+            accept="image/png,image/jpeg,image/jpg,image/"
+            i18n-label="Click or drag images here"
+            label="Click or drag images here"
+            maxFileSize="10485760"
+            multiple="true"
+    >
+    </ngx-dropzone>
+    <!--    <div>-->
+    <!--        <div (cdkDropListDropped)="drop($event)"-->
+    <!--             cdkDropList-->
+    <!--             cdkDropListOrientation="horizontal"-->
+    <!--             class="list"-->
+    <!--             style="align-self: flex-end">-->
+    <!--            <div *ngFor="let url of previewUrls"-->
+    <!--                 cdkDrag-->
+    <!--                 class="list-item">-->
+    <!--                <img [src]="url" class="display-image">-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+
+    <div class="example-container" cdkDropListGroup>
+        <div cdkDropList [cdkDropListEnterPredicate]="dropListEnterPredicate"
+             (cdkDropListDropped)="dropListDropped()"></div>
+        <div cdkDropList *ngFor="let url of previewUrls"
+             [cdkDropListEnterPredicate]="dropListEnterPredicate" (cdkDropListDropped)="dropListDropped()">
+            <div cdkDrag class="example-box" (cdkDragMoved)="dragMoved($event);">
+
+                <img [src]="url" class="display-image">
+                <button mat-raised-button color="warn" (click)="onDelete(url)">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

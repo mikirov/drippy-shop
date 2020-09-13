@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../shared/models/product';
-import { ProductService } from '../../../shared/services/product.service';
+import {Component, OnInit} from '@angular/core';
+import {Product} from '../../../shared/models/product';
+import {ProductService} from '../../../shared/services/product.service';
 
 @Component({
-  selector: 'app-product-tabs',
-  templateUrl: './product-tabs.component.html',
-  styleUrls: ['./product-tabs.component.scss']
+    selector: 'app-product-tabs',
+    templateUrl: './product-tabs.component.html',
+    styleUrls: ['./product-tabs.component.scss']
 })
 export class ProductTabsComponent implements OnInit {
 
-  public products: Product[] = [];
+    public products: Product[] = [];
 
-  constructor(public productService: ProductService) { 
-    this.productService.getProducts.subscribe(response => this.products = response);
-  }
+    constructor(public productService: ProductService) {
+        this.productService.getProducts.subscribe(response => this.products = response);
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

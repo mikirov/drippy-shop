@@ -9,8 +9,6 @@ import { CollectionLeftSidebarComponent } from './collection/collection-left-sid
 import { CartComponent } from './cart/cart.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { CompareComponent } from './compare/compare.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { SuccessComponent } from './checkout/success/success.component';
 
 import { Resolver } from '../shared/services/resolver.service';
 
@@ -25,6 +23,10 @@ const routes: Routes = [
   {
     path: 'collection/left/sidebar',
     component: CollectionLeftSidebarComponent
+  },
+  {
+    path: 'product/set',
+    loadChildren: () => import('./product-set/product-set.module').then(m => m.ProductSetModule)
   },
   // {
   //   path: 'collection/right/sidebar',
@@ -46,14 +48,7 @@ const routes: Routes = [
     path: 'compare',
     component: CompareComponent
   },
-  {
-    path: 'checkout',
-    component: CheckoutComponent
-  },
-  {
-    path: 'checkout/success/:id',
-    component: SuccessComponent
-  }
+
 ];
 
 @NgModule({

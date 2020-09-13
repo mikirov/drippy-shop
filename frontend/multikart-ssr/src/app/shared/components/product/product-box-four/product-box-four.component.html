@@ -5,15 +5,15 @@
             <span class="lable2" *ngIf="product.sale">{{ product?.discount }}% off</span>
         </div>
         <div class="front">
-            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+            <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
                 <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
-                     [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src"  
-                     class="img-fluid lazy-loading" alt="{{ product.images[0].alt }}">
+                     [lazyLoad]="ImageSrc ? ImageSrc : product.urls[0]"
+                     class="img-fluid lazy-loading" alt="">
             </a>
         </div>
         <div class="back" *ngIf="onHowerChangeImage">
-            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}">
+            <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
+                <img [src]="ImageSrc ? ImageSrc : product.urls[1]" class="img-fluid lazy-loading" alt="">
             </a>
         </div>
         <div class="cart-info">
@@ -40,8 +40,8 @@
   <div class="product-detail">
     <div>
       <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-      <a [routerLink]="['/shop/product/left/sidebar/', product?.title.replace(' ', '-')]">
-        <h6>{{ product?.title | titlecase }}</h6>
+      <a [routerLink]="['/shop/product/left/sidebar/', product?.name.replace(' ', '-')]">
+        <h6>{{ product?.name | titlecase }}</h6>
       </a>
       <h4>
         {{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}
@@ -57,5 +57,4 @@
   
   <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>
   <app-cart-modal #cartModal [product]="product" [currency]="currency" *ngIf="cartModal"></app-cart-modal>
-  
   

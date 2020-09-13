@@ -50,6 +50,8 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 
 // Pipes
 import { DiscountPipe } from './pipes/discount.pipe';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialModule} from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -102,6 +104,8 @@ import { DiscountPipe } from './pipes/discount.pipe';
   exports: [
     CommonModule,
     FormsModule,
+    MaterialModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     NgbModule,
     CarouselModule,

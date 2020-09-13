@@ -22,9 +22,10 @@
                             <!-- brand filter start -->
                             <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
                             </app-brands>
+<!--                            // TODO: decide if color variation should exist-->
                             <!-- color filter start here -->
-                            <app-colors [products]="products" [colors]="colors" (colorsFilter)="updateFilter($event)">
-                            </app-colors>
+<!--                            <app-colors [products]="products" [colors]="colors" (colorsFilter)="updateFilter($event)">-->
+<!--                            </app-colors>-->
                             <!-- size filter start here -->
                             <app-size [products]="products" [size]="size" (sizeFilter)="updateFilter($event)">
                             </app-size>
