@@ -12,23 +12,24 @@ export class Product implements PreviewProduct{
     urls: string[];
     constructor() {
         this.urls = [];
+        this.variants = [];
+        this.collection = [];
     }
     id: string;
     name: string;
     description?: string;
-    type?: string;
+    type?: string; //done
     brand?: string;
     collection?: any[];
-    category?: string;
-    price: number;
-    sale?: boolean;
-    discount?: number;
-    stock?: number;
-    new?: boolean;
-    quantity?: number;
-    tags?: any[];
+    category?: string; // done
+    price: number; //done
+    sale?: boolean; // done
+    discount?: number; // done
+    stock?: number; // done
+    new?: boolean; // done
+    quantity?: number; // done
+    tags?: any[]; // done
     variants?: Variants[];
-    additionalDetails: any;
 }
 
 export interface Variants {

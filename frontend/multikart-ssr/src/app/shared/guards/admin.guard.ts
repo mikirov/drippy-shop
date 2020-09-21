@@ -14,15 +14,15 @@ export class AdminGuard implements CanActivate {
   canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.auth.user$.pipe(
-        take(1),
-        map(user => user.admin), // <-- map to boolean
-        tap(isAdmin => {
-          if (!isAdmin) {
-            console.log('access denied');
-            this.router.navigate(['/']);
-          }
-        })
-    );
+        // return this.auth.isAdmin();
+        return this.auth.user$.pipe(
+          take(1),
+          map(user => user.admin),
+            tap(admin => {
+                if(!admin){
+                    console.log("user is not admin");
+                }
+            })
+        );
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductService } from "../../shared/services/product.service";
-import { Product } from "../../shared/models/product";
+import { ProductService } from '../../shared/services/product.service';
+import { Product } from '../../shared/models/product';
+import {CheckoutService} from "../../shared/services/checkout.service";
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,7 @@ export class CartComponent implements OnInit {
 
   public products: Product[] = [];
 
-  constructor(public productService: ProductService) {
+  constructor(public productService: ProductService, public checkoutService: CheckoutService) {
     this.productService.cartItems.subscribe(response => this.products = response);
   }
 

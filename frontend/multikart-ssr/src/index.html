@@ -12,25 +12,33 @@
 </head>
 
 <body class="ltr mat-typography">
-    <app-root></app-root>
-    <script src="https://checkout.stripe.com/checkout.js"></script>
-    <!-- facebook chat section start -->
-	<div id="fb-root"></div>
-	<script>
-	  (function(d, s, id) {
-	    var js, fjs = d.getElementsByTagName(s)[0];
-	    if (d.getElementById(id)) return;
-	    js = d.createElement(s);
-	    js.id = id;
-	    js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
-	    fjs.parentNode.insertBefore(js, fjs);
-	  }(document, 'script', 'facebook-jssdk'));
-	</script>
+<app-root></app-root>
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<!-- facebook chat section start -->
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml            : true,
+            version          : 'v8.0'
+        });
+    };
 
-	<!-- Your customer chat code -->
-	<div id="fb-chat" class="fb-customerchat" attribution=setup_tool page_id="101661791629944" theme_color="#ff4c3b" logged_in_greeting="Hi! Welcome to Drippy shop! How can we help you?" logged_out_greeting="Hi! Welcome to Drippy shop  How can we help you?">
-	</div>
-	<!-- facebook chat section end -->
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+<!-- Your customer chat code -->
+<div id="fb-chat" class="fb-customerchat" attribution=setup_tool page_id="101661791629944" theme_color="#ff4c3b" logged_in_greeting="Hi! Welcome to Drippy shop! How can we help you?" logged_out_greeting="Hi! Welcome to Drippy shop  How can we help you?">
+</div>
+<!-- facebook chat section end -->
+
 </body>
 
 </html>

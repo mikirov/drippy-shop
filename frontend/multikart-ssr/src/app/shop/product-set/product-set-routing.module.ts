@@ -6,7 +6,7 @@ import {AdminGuard} from '../../shared/guards/admin.guard';
 
 const routes = [
     {path: '', canActivate: [AuthGuard], component: ProductSetComponent},
-    {path: ':id', canActivate: [AuthGuard, AdminGuard], component: ProductSetComponent},
+    {path: ':id', canActivate: [AuthGuard], component: ProductSetComponent},
 ];
 
 @NgModule({

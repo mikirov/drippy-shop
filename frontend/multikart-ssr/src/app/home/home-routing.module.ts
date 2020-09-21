@@ -5,7 +5,7 @@ import {FashionOneComponent} from './fashion/fashion-one/fashion-one.component';
 
 const routes: Routes = [
     {
-        path: 'fashion',
+        path: '',
         component: FashionOneComponent
     },
 ];

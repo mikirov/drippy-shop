@@ -80,7 +80,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "multikart:build"
+            "browserTarget": "multikart:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
@@ -142,7 +143,10 @@
           "options": {
             "outputPath": "dist/multikart/server",
             "main": "server.ts",
-            "tsConfig": "tsconfig.server.json"
+            "tsConfig": "tsconfig.server.json",
+            "externalDependencies": [
+              "@firebase/firestore"
+            ]
           },
           "configurations": {
             "production": {
@@ -182,6 +186,12 @@
           },
           "configurations": {
             "production": {}
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "ssr": true
           }
         }
       }

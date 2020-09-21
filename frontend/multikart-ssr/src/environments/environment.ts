@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  instagram_token: 'INSTAGRAM_TOKEN',
+  instagram_token: 'IGQVJYNnRMZAVo2UnBjb05tN1VQRWhwN3ViS3NlS2xpZA2ZAqU0RiUHVXVUdUV0YySDFEdS02WlVCZAThvR2loeHpaZAFpqVEkya1lKR1dVbjV5MmtvVTVaaUtrV2ViRXoxRWxSTmFOSlNVb2JsNVhRN25tZAAZDZD',
   stripe_token: 'STRIPE_PUBLISHABLE_KEY',
   paypal_token: 'PAYPAL_CLIENT_ID',
   delivery_econt_shop_id: '4904065'

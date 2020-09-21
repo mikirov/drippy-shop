@@ -1,11 +1,16 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetailsMainSlider, ProductDetailsThumbSlider} from '../../../shared/data/slider';
 import {Product} from '../../../shared/models/product';
 import {ProductService} from '../../../shared/services/product.service';
 import {SizeModalComponent} from '../../../shared/components/modal/size-modal/size-modal.component';
-import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../../environments/environment";
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {AuthService} from '../../../shared/services/auth.service';
+import {CheckoutService} from '../../../shared/services/checkout.service';
+import {MatDialog} from "@angular/material/dialog";
+import {CheckoutComponent} from "../../../shared/components/checkout/checkout.component";
 
 @Component({
     selector: 'app-three-column',
@@ -13,26 +18,41 @@ import {environment} from "../../../../environments/environment";
     styleUrls: ['./three-column.component.scss']
 })
 
-export class ThreeColumnComponent implements OnInit {
+export class ThreeColumnComponent {
 
+
+    checkoutUrl = '';
+
+    constructor(private route: ActivatedRoute, private router: Router,
+                public productService: ProductService, public checkoutService: CheckoutService, public auth: AuthService,
+                public dialog: MatDialog) {
+
+        const productId = this.route.snapshot.paramMap.get('id');
+        if (productId) {
+            this.product$ = this.productService.getProduct(productId);
+            this.product$.subscribe(product => {
+                this.product = product;
+                this.checkoutUrl = this.checkoutService.checkoutWithEcont([product]);
+            });
+        } else {
+            this.router.navigateByUrl('pages/404', {skipLocationChange: true});
+        }
+    }
+
+
+    public product$: Observable<Product>;
     public product: Product;
     public counter = 1;
     public activeSlide: any = 0;
     public selectedSize: any;
+    isCheckingOut = false;
+
 
     @ViewChild('sizeChart') SizeChart: SizeModalComponent;
 
     public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
     public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
 
-    constructor(private route: ActivatedRoute, private router: Router,
-                public productService: ProductService, public http: HttpClient) {
-        this.route.data.subscribe(response => this.product = response.data);
-    }
-
-
-    ngOnInit(): void {
-    }
 
     // Get Product Color
     Color(variants) {
@@ -90,39 +110,35 @@ export class ThreeColumnComponent implements OnInit {
         }
     }
 
-    buyNowWithEcont(product: Product) {
-        const orderParams = {
-            id_shop: environment.delivery_econt_shop_id, // идентификатор на магазина
-            currency: 'BGN', // валута на поръчката
-            items: [ // списък с продуктите в количката
-                {
-                    name: product.name, // Име на продукта
-                    // SKU:'ITM1',//Код на продукта (опционално)
-                    // URL:'http://example.org/shop/product-name-2',//адрес на продукта в магазина (опционално)
-                    // imageURL:'http://example.org/shop/product-images/product-name-2.jpg',//адрес картинка на продукта (опционално)
-                    count: 1, // закупени бройки (по избор, 1 по подразбиране)
-                    hideCount: 1, // приема стойности 0 и 1. Служи за скриване на формата за промяна на количество.
-                    totalWeight: 0.5, // общо тегло (тегло * брой)
-                    totalPrice: product.price  // обща цена (ед. цена * брой)
-                }
-            ]
-        };
-        const url = 'http://delivery.econt.com/checkout.php'; // + jQuery.param(orderParams);
-
-        const parameters = new HttpParams();
-        for (const key in orderParams) {
-            if (orderParams.hasOwnProperty(key)) {
-                const element = orderParams[key];
-
-                parameters.set(key, element);
-            }
-        }
-        this.http.get(url, {params: parameters});
-    }
-
     // Add to Wishlist
     addToWishlist(product: any) {
         this.productService.addToWishlist(product);
     }
 
+    setCheckingOut() {
+        this.isCheckingOut = !this.isCheckingOut;
+    }
+
+// добавяне на функция, която 'слуша' данни връщани от формите за доставка
+
+
+    openCheckout() {
+        const dialogRef = this.dialog.open(CheckoutComponent, {
+            width: 'auto',
+            height: 'auto',
+            maxHeight: "100%",
+            maxWidth: "100%",
+            data: {
+                products: [this.product]
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog result: ${result}`);
+        });
+    }
+
+    openEcontCheckout() {
+        window.open(this.checkoutUrl, 'econt-delivery-order', 'width=600,height=840');
+    }
 }

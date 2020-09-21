@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BarRatingModule } from 'ngx-bar-rating';
-import { LazyLoadImageModule, scrollPreset } from 'ng-lazyload-image';
+import { LazyLoadImageModule} from 'ng-lazyload-image';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -42,8 +42,6 @@ import { AgeVerificationComponent } from './components/modal/age-verification/ag
 // Skeleton Loader Components
 import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
 
-// Layout Box
-import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
 
 // Tap To Top
 import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component';
@@ -52,6 +50,8 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 import { DiscountPipe } from './pipes/discount.pipe';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialModule} from './material/material.module';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -83,9 +83,10 @@ import {MaterialModule} from './material/material.module';
     SizeModalComponent,
     AgeVerificationComponent,
     SkeletonProductBoxComponent,
-    LayoutBoxComponent,
     TapToTopComponent,
-    DiscountPipe
+    DiscountPipe,
+    CheckoutComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,
@@ -99,7 +100,8 @@ import {MaterialModule} from './material/material.module';
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
     NgxSkeletonLoaderModule,
-    TranslateModule
+    TranslateModule,
+    MaterialModule
   ],
   exports: [
     CommonModule,
@@ -138,7 +140,6 @@ import {MaterialModule} from './material/material.module';
     SizeModalComponent,
     AgeVerificationComponent,
     SkeletonProductBoxComponent,
-    LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe
   ]

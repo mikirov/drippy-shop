@@ -2,9 +2,9 @@
     <ng-container *ngFor="let insta of instagram?.data">
         <ng-template carouselSlide>
             <div>
-                <a [href]="insta.link">
+                <a [href]="insta.permalink">
                     <div class="instagram-box">
-                        <img [src]="insta.images.standard_resolution.url" alt="Avatar" style="width:100%">
+                        <img [src]="insta.media_url" alt="Avatar" style="width:100%">
                         <div class="overlay">
                             <i class="fa fa-instagram" aria-hidden="true"></i>
                         </div>

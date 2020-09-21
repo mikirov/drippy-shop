@@ -19,7 +19,8 @@ const state = {
 })
 export class ProductService {
 
-  public Currency = { name: 'Dollar', currency: 'USD', price: 1 }; // Default Currency
+  // public Currency = { name: 'Dollar', currency: 'USD', price: 1 }; // Default Currency
+  public Currency = { name: 'Лев', currency: 'лв.', price: 1 }; // Default Currency
   public OpenCart = false;
   public Products;
 

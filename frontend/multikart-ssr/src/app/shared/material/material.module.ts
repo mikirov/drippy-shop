@@ -104,7 +104,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatChipsModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatDialogModule,
     MatDividerModule,
     MatExpansionModule,
     MatGridListModule,

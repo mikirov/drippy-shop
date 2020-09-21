@@ -1,33 +1,35 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import {Component, OnInit, Input, HostListener} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
-  selector: 'app-header-four',
-  templateUrl: './header-four.component.html',
-  styleUrls: ['./header-four.component.scss']
+    selector: 'app-header-four',
+    templateUrl: './header-four.component.html',
+    styleUrls: ['./header-four.component.scss']
 })
 export class HeaderFourComponent implements OnInit {
 
-  @Input() class: string = 'header-2 header-6';
-  @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
-  @Input() topbar: boolean = true; // Default True
-  @Input() sticky: boolean = false; // Default false
-  
-  public stick: boolean = false;
+    @Input() class = 'header-2 header-6';
+    @Input() themeLogo = 'assets/images/icon/logo.png'; // Default Logo
+    @Input() topbar = true; // Default True
+    @Input() sticky = false; // Default false
 
-  constructor() { }
+    public stick = false;
 
-  ngOnInit(): void {
-  }
-
-  // @HostListener Decorator
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (number >= 300 && window.innerWidth  > 400) { 
-      this.stick = true;
-    } else {
-      this.stick = false;
+    constructor(public auth: AuthService) {
     }
-  }
+
+    ngOnInit(): void {
+    }
+
+    // @HostListener Decorator
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        const number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (number >= 300 && window.innerWidth > 400) {
+            this.stick = true;
+        } else {
+            this.stick = false;
+        }
+    }
 
 }

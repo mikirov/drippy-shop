@@ -23,7 +23,7 @@
             <tr>
               <td>
                   <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
-                    <img [src]="product.images[0].src" [alt]="product.images[0].alt">
+                    <img [src]="product.urls[0]" [alt]="">
                   </a>
               </td>
               <td>
@@ -73,7 +73,7 @@
     <div class="row wishlist-buttons" *ngIf='products.length'>
       <div class="col-12">
         <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
-        <a [routerLink]="['/shop/checkout']" class="btn btn-solid">check out</a>
+        <a (click)="checkoutService.checkoutWithEcont(products)" class="btn btn-solid">check out</a>
       </div>
     </div>
   </div>

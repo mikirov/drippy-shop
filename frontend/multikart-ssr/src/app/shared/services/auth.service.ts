@@ -5,7 +5,9 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {first, shareReplay, switchMap} from 'rxjs/operators';
-import {auth} from "firebase";
+import {auth} from 'firebase';
+import * as firebase from 'firebase';
+import OAuthCredential = firebase.auth.OAuthCredential;
 
 @Injectable({
     providedIn: 'root'
@@ -69,5 +71,21 @@ export class AuthService {
         const provider = new auth.GoogleAuthProvider();
         const credential = await this.afs.signInWithPopup(provider);
         return this.updateUserData(credential.user);
+    }
+
+    isAdmin(): boolean {
+        return this.snapshotUser.admin;
+    }
+
+    async facebookSignin() {
+        const provider = new firebase.auth.FacebookAuthProvider();
+        firebase.auth().useDeviceLanguage();
+        provider.setCustomParameters({
+            display: 'popup'
+        });
+        const result = await firebase.auth().signInWithPopup(provider);
+        const credential: OAuthCredential = result.credential;
+        console.log(credential.accessToken);
+        return this.updateUserData(result.user);
     }
 }
