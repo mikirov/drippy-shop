@@ -57,6 +57,10 @@ typings/
 # dotenv environment variables file
 .env
 
+
+frontend/multikart-ssr/src/environments/environment.ts
+frontend/multikart-ssr/src/environments/environment.prod.ts
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
