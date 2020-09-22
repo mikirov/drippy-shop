@@ -1,0 +1,268 @@
+<div fxLayoutAlign="center start">
+    <mat-vertical-stepper #stepper linear fxFlex="50%" fxFlex.lt-sm="100%">
+        <mat-step i18n-label="Fill product details" [stepControl]="productForm" label="Fill product details">
+            <form [formGroup]="productForm">
+                <ng-template i18n="Fill product details" matStepLabel>Fill product details</ng-template>
+                <mat-form-field class="form-field">
+                    <input #productName
+                           formControlName="name"
+                           matInput
+                           i18n-placeholder="product name" minlength="3" placeholder="Name">
+                    <mat-hint i18n="product name">
+                        Product name
+                    </mat-hint>
+                    <mat-error *ngIf="productForm.controls['name'].invalid">
+                        {{getNameErrorMessage()}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <input #productBrand
+                           formControlName="brand"
+                           matInput
+                           i18n-placeholder="product brand" placeholder="Brand">
+                    <mat-hint i18n="product brand">
+                        Product brand
+                    </mat-hint>
+                    <mat-error *ngIf="productForm.controls['brand'].hasError('required') ">
+                        Product brand is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline"
+                                class="form-field"
+                                hintLabel="Max 10 000 characters"
+                                i18n-hintlabel="Max 10 000 characters">
+
+                <textarea #productDescription
+                          cdkAutosizeMaxRows="10"
+                          cdkAutosizeMinRows="5"
+                          cdkTextareaAutosize
+                          formControlName="description"
+                          i18n-placeholder="description| product description" matInput maxlength="10000"
+                          placeholder="Description"></textarea>
+                    <mat-hint align="end">{{productDescription.value?.length || 0}}/10000</mat-hint>
+                    <mat-error *ngIf="productForm.controls['description'].invalid ">
+                        {{getDescriptionErrorMessage()}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field" hintLabel="Product Price" i18n-hintlabel="product price">
+                    <input #productPrice
+                           formControlName="price"
+                           matInput
+                           i18n-placeholder="product price"
+                           placeholder="price"
+                           type="number">
+                    <mat-error *ngIf="productForm.controls['price'].hasError('required') ">
+                        Product description is <strong>required</strong>
+                    </mat-error>
+
+                </mat-form-field>
+
+                <mat-form-field class="form-field" hintLabel="Product stock" i18n-hintlabel="product stock">
+                    <input #productStock
+                           formControlName="stock"
+                           matInput
+                           i18n-placeholder="product stock"
+                           placeholder="stock"
+                           type="number">
+                    <mat-error *ngIf="productForm.controls['stock'].hasError('required') ">
+                        Product stock is <strong>required</strong>
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-form-field class="form-field" hintLabel="Product quantity" i18n-hintlabel="product quantity">
+                    <input #productQuantity
+                           formControlName="quantity"
+                           matInput
+                           i18n-placeholder="product quantity"
+                           placeholder="quantity"
+                           type="number">
+                    <mat-error *ngIf="productForm.controls['quantity'].hasError('required') ">
+                        Product quantity is <strong>required</strong>
+                    </mat-error>
+
+                </mat-form-field>
+                <mat-form-field class="form-field" hintLabel="Product Discount" i18n-hintlabel="product discount">
+                    <input #productDiscount
+                           formControlName="discount"
+                           matInput
+                           i18n-placeholder="product discount"
+                           placeholder="discount"
+                           type="number">
+                    <mat-error *ngIf="productForm.controls['discount'].hasError('required') ">
+                        Product discount is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-chip-list #chipListTag aria-label="tag selection">
+                        <mat-chip *ngFor="let tag of tags" [selectable]="false"
+                                  [removable]="true" (removed)="removeTag(tag)">
+                            {{tag}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="New tag..."
+                               [matChipInputFor]="chipListTag"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="true"
+                               (matChipInputTokenEnd)="addTag($event)">
+                    </mat-chip-list>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-chip-list #chipListCollection aria-label="collection selection">
+                        <mat-chip *ngFor="let collection of collections" [selectable]="false"
+                                  [removable]="true" (removed)="removeCollection(collection)">
+                            {{collection}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="New collection..."
+                               [matChipInputFor]="chipListCollection"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="true"
+                               (matChipInputTokenEnd)="addCollection($event)">
+                    </mat-chip-list>
+                </mat-form-field>
+
+                <mat-checkbox [checked]="productNew">Product is new</mat-checkbox>
+                <mat-checkbox [checked]="productSale">Product is on sale</mat-checkbox>
+
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product Type</mat-label>
+                    <mat-select (selectionChange)="setType($event)">
+                        <mat-option value="T-shirt">T-shirt</mat-option>
+                        <mat-option value="Hoodie">Hoodie</mat-option>
+                        <mat-option value="Belt">Belt</mat-option>
+                        <mat-option value="Pants">Pants</mat-option>
+                        <mat-option value="Skirt">Skirt</mat-option>
+                        <mat-option value="Dress">Dress</mat-option>
+                        <mat-option value="Kimono">Kimono</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Product category</mat-label>
+                    <mat-select (selectionChange)="setCategory($event)">
+                        <mat-option value="Women">Women</mat-option>
+                        <mat-option value="Men">Men</mat-option>
+                        <mat-option value="Accessories">Accessories</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+
+                <div style="margin: 10px;">
+                    <button (click)="fillProductDetails(productName.value,
+                    productDescription.value,
+                    productPrice.value,
+                    productDiscount.value,
+                    productQuantity.value,
+                    productStock.value,
+                    productBrand.value)"
+                            i18n="Next"
+                            mat-raised-button
+                            matStepperNext>
+                        Next
+                    </button>
+
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step i18n-label="Upload product images" label="Upload product images">
+            <div style="align-self: center">
+                <ng-template i18n="Select product pictures" matStepLabel>Select product pictures</ng-template>
+                <!--<app-image></app-image>-->
+                <app-image-preview (newFilesSelected)="onFilesSelected($event)" [previewUrls]="product.urls"
+                                   (previewUrlsChange)="onUrlsSelected($event)"></app-image-preview>
+                <!--<app-uploader (previewUrls)="OnUploads($event)"></app-uploader>-->
+            </div>
+
+            <div>
+                <button i18n="Back" mat-raised-button matStepperPrevious style="margin: 10px 10px;">Back</button>
+                <button i18n="Next" mat-raised-button matStepperNext style="margin: 10px 10px;">Next
+                </button>
+            </div>
+        </mat-step>
+        <mat-step i18n-label="Create variants" label="Create variants">
+            <div style="align-self: center">
+                <form [formGroup]="variantForm">
+                    <mat-radio-group (change)="setVariationSize($event)" aria-label="Product size">
+                        <mat-radio-button value="Universal">Universal</mat-radio-button>
+                        <mat-radio-button value="XS">XS</mat-radio-button>
+                        <mat-radio-button value="S">S</mat-radio-button>
+                        <mat-radio-button value="M">M</mat-radio-button>
+                        <mat-radio-button value="L">L</mat-radio-button>
+                        <mat-radio-button value="XL">XL</mat-radio-button>
+                        <mat-radio-button value="XXL">XXL</mat-radio-button>
+                        <mat-error *ngIf="variantForm.controls['size'].hasError('required') ">
+                            Variant size is <strong>required</strong>
+                        </mat-error>
+                    </mat-radio-group>
+
+                    <mat-form-field class="form-field">
+                        <input #variationColor
+                               formControlName="color"
+                               matInput
+                               i18n-placeholder="product color" placeholder="Color">
+                        <mat-hint i18n="product color">
+                            Product color
+                        </mat-hint>
+                        <mat-error *ngIf="variantForm.controls['color'].hasError('required') ">
+                            Variant color is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="form-field">
+                        <input #variationImage
+                               formControlName="imageIndex"
+                               matInput
+                               i18n-placeholder="variation image" placeholder="variation image index" type="number">
+                        <mat-hint i18n="variant image">
+                            Image number associated with variant
+                        </mat-hint>
+                    </mat-form-field>
+
+                    <button mat-raised-button (click)="addVariation(variationColor.value, variationImage.value)">Add variant</button>
+
+                </form>
+
+            </div>
+
+            <div>
+                <button i18n="Back" mat-raised-button matStepperPrevious style="margin: 10px 10px;">Back</button>
+                <button i18n="Next" mat-raised-button matStepperNext style="margin: 10px 10px;">Next
+                </button>
+            </div>
+        </mat-step>
+        <mat-step label="Create product">
+            <div class="mat-typography">
+                <ng-template i18n="Done" matStepLabel>Done</ng-template>
+                <h3 i18n="Create product lisitng">Create product listing:</h3>
+                <mat-progress-spinner
+                        *ngIf="uploading"
+                        mode="indeterminate"></mat-progress-spinner>
+                <button (click)="uploadProduct()"
+                        *ngIf="!uploading"
+                        i18n="Upload | Upload product listing button"
+                        mat-raised-button>
+                    Upload product listing
+                </button>
+                <div>
+                    <button i18n="Back" mat-raised-button matStepperPrevious style="margin: 10px 10px;">Back</button>
+                    <button (click)="stepper.reset()" i18n="Reset" mat-raised-button style="margin: 10px 10px;">Reset
+                    </button>
+                </div>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+    <div fxFlex="3%" class="divider" fxHide.lt-sm>
+        <mat-divider [vertical]="true"></mat-divider>
+        <!--        todo divider has 0 height-->
+    </div>
+    <div fxFlex="47%" fxHide.lt-sm fxLayoutAlign="center center" style="padding: 30px">
+        <app-product-preview [product]="previewProduct$ | async"></app-product-preview>
+    </div>
+</div>

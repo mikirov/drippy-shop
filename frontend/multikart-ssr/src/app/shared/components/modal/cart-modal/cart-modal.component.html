@@ -9,14 +9,14 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         <div class="media">
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                                <img class="img-fluid pro-img" [src]="product.images[0].src" [alt]="product.images[0].alt">
+                            <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
+                                <img class="img-fluid pro-img" [src]="product.urls[0]" [alt]="">
                             </a>
                             <div class="media-body align-self-center text-center">
-                                <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+                                <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
                                     <h6>
                                         <i class="fa fa-check"></i>Item
-                                        <span>{{ product.title | titlecase }}</span>
+                                        <span>{{ product.name | titlecase }}</span>
                                         <span> successfully added to your Cart</span>
                                     </h6>
                                 </a>

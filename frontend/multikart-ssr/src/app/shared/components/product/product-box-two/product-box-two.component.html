@@ -4,9 +4,9 @@
 		<span class="lable4" *ngIf='product.sale'>on sale</span>
 	</div>
 	<div class="front">
-        <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
+        <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
             <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
-                 [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src" 
+                 [lazyLoad]="ImageSrc ? ImageSrc : product.urls[0]"
                  class="img-fluid lazy-loading" alt="">
         </a>
 	</div>
@@ -32,8 +32,8 @@
 	<div class="rating">
 		<bar-rating [rate]="5" [readOnly]="true" class="text-center pro-rating"></bar-rating>
 	</div>
-    <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-        <h6>{{ product.title | titlecase }}</h6>
+    <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
+        <h6>{{ product.name | titlecase }}</h6>
     </a>
     <h4>
         {{ product?.price * currency?.price | discount:product | currency:currency?.currency:'symbol' }}

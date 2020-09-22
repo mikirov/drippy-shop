@@ -3,41 +3,59 @@
     <div class="mobile-fix-option"></div>
     <div class="top-header" *ngIf="topbar">
         <div class="container">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="header-contact">
-                <ul>
-                  <li>Welcome to Our store Multikart</li>
-                  <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 123 - 456 - 7890</li>
-                </ul>
-              </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="header-contact">
+                        <ul>
+                            <li>Welcome to Our store Drippy shop</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 0886991516</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <ul class="header-dropdown">
+                        <li class="compare">
+                            <a [routerLink]="['/shop/compare']"><i class="fa fa-random"
+                                                                   aria-hidden="true"></i>Compare</a>
+                        </li>
+                        <li class="mobile-wishlist">
+                            <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+                        </li>
+
+                        <div *ngIf="auth.user$ | async; then authenticated else guest">
+                            <!-- template will replace this div -->
+                        </div>
+                        <ng-template #guest>
+                            <li>
+                                <a (click)="auth.googleSignin()">
+                                    Login <i  class="fa fa-google"></i>
+                                </a>
+
+                            </li>
+
+                        </ng-template>
+
+                        <ng-template #authenticated>
+
+                            <li *ngIf="auth.user$ | async as user" class="onhover-dropdown mobile-account">
+                                <i class="fa fa-user" aria-hidden="true"></i> My Account
+                                <ul class="onhover-show-div">
+
+                                    <li>
+                                        <a (click)="auth.signOut()">Logout</a>
+                                    </li>
+                                    <li *ngIf="user.admin">
+                                        <a href="/shop/product/set">Create product</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        </ng-template>
+
+                    </ul>
+
+                </div>
             </div>
-            <div class="col-lg-6 text-right">
-              <ul class="header-dropdown">
-                <li class="compare">
-                  <a [routerLink]="['/shop/compare']"><i class="fa fa-random" aria-hidden="true"></i>Compare</a>
-                </li>
-                <li class="mobile-wishlist">
-                  <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
-                </li>
-                <li class="onhover-dropdown mobile-account">
-                  <i class="fa fa-user" aria-hidden="true"></i> My Account
-                  <ul class="onhover-show-div">
-                    <li>
-                      <a data-lng="en">
-                        Login
-                      </a>
-                    </li>
-                    <li>
-                      <a data-lng="es">
-                        Logout
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
         </div>
     </div>
     <div class="container">

@@ -1,4 +1,4 @@
-<app-header-one [sticky]="true"></app-header-one>
+<app-header-four [sticky]="true"></app-header-four>
 
 <!-- Home slider start-->
 <section class="p-0">
@@ -12,26 +12,26 @@
 <!-- Home slider End -->
 
 <!-- collection banner start-->
-<section class="pb-0">
-  <div class="container">
-    <div class="row partition2">
-      <div class="col-md-6" *ngFor="let collection of collections">
-        <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: 'fashion'}">
-          <div class="collection-banner p-right text-center">
-            <img [src]="collection.image" class="img-fluid" alt="collection-banner">
-            <div class="contain-banner">
-              <div>
-                <h4>{{collection.save}}</h4>
-                <h2>{{collection.title}}</h2>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- collection banner End -->
+<!--<section class="pb-0">-->
+<!--  <div class="container">-->
+<!--    <div class="row partition2">-->
+<!--      <div class="col-md-6" *ngFor="let collection of collections">-->
+<!--        <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ collection: collection}">-->
+<!--          <div class="collection-banner p-right text-center">-->
+<!--            <img [src]="collection.image" class="img-fluid" alt="collection-banner">-->
+<!--            <div class="contain-banner">-->
+<!--              <div>-->
+<!--                <h4>{{collection.save}}</h4>-->
+<!--                <h2>{{collection.title}}</h2>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!-- collection banner End-->
 
 <!-- Product slider start-->
 <div class="title1 section-t-space">
@@ -43,8 +43,8 @@
     <div class="col-lg-6 offset-lg-3">
       <div class="product-para">
         <p class="text-center">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry, 
-          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+          Drippy shop offers hand-picked new and second hand clothes and accessories.
+          Here are some from our top collection
         </p>
       </div>
     </div>
@@ -82,8 +82,8 @@
       <div class="row">
         <div class="col">
           <div class="banner-contain">
-            <h2>2018</h2>
-            <h3>fashion trends</h3>
+            <h2>{{currentYear}}</h2>
+<!--            <h3>fashion trends</h3>-->
             <h4>special offer</h4>
           </div>
         </div>
@@ -135,25 +135,25 @@
 </div>
 <!-- services End -->
 
-<!-- blog section start-->
-<section class="blog p-t-0">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="title1 section-t-space">
-          <h4>Recent Story</h4>
-          <h2 class="title-inner1">from the blog</h2>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <app-blog [blogs]="blog"></app-blog>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- blog section End -->
+<!--&lt;!&ndash; blog section start&ndash;&gt;-->
+<!--<section class="blog p-t-0">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <div class="title1 section-t-space">-->
+<!--          <h4>Recent Story</h4>-->
+<!--          <h2 class="title-inner1">from the blog</h2>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-12">-->
+<!--        <app-blog [blogs]="blog"></app-blog>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--&lt;!&ndash; blog section End &ndash;&gt;-->
 
 <!-- Instagram section -->
 <section class="instagram">
@@ -169,15 +169,15 @@
 <!-- Instagram section End -->
 
 <!--  logo section start-->
-<section class="section-b-space">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <app-logo [logos]="logo"></app-logo>
-      </div>
-    </div>
-  </div>
-</section>
+<!--<section class="section-b-space">-->
+<!--  <div class="container">-->
+<!--    <div class="row">-->
+<!--      <div class="col-md-12">-->
+<!--        <app-logo [logos]="logo"></app-logo>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
 <!--  logo section End-->
 
 <app-newsletter></app-newsletter>

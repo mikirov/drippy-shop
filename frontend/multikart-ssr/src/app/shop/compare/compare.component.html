@@ -25,13 +25,13 @@
                             <!-- Product Name -->
                             <tr>
                                 <th class="product-name">Product Name</th>
-                                <td class="grid-link__title" *ngFor="let product of products">{{ product.title | titlecase }}</td>
+                                <td class="grid-link__title" *ngFor="let product of products">{{ product.name | titlecase }}</td>
                             </tr>
                             <!-- Product Image -->
                             <tr>
                                 <th class="product-name ">Product Image</th>
                                 <td class="item-row" *ngFor="let product of products">
-                                    <img [src]="product.images[0].src" [alt]="product.images[0].alt" width="185" class="featured-image">
+                                    <img [src]="product.urls[0]" [alt]="" width="185" class="featured-image">
                                     <div class="product-price product_price"> 
                                     <strong>On Sale: </strong><span> {{ (product.price | discount:product) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}</span></div>
                                     <form class="variants clearfix">

@@ -1,20 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { BlogSlider } from '../../../shared/data/slider';
+import {Component, OnInit, Input} from '@angular/core';
+import {BlogSlider} from '../../../shared/data/slider';
 
 @Component({
-  selector: 'app-blog',
-  templateUrl: './blog.component.html',
-  styleUrls: ['./blog.component.scss']
+    selector: 'app-blog',
+    templateUrl: './blog.component.html',
+    styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  
-  @Input() blogs: any[] = [];
 
-  constructor() { }
+    @Input() blogs: any[] = [];
 
-  ngOnInit(): void {
-  }
+    constructor() {
+    }
 
-  public BlogSliderConfig: any = BlogSlider;
+    ngOnInit(): void {
+    }
+
+    public BlogSliderConfig: any = BlogSlider;
 
 }
