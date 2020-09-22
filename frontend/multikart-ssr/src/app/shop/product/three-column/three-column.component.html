@@ -181,13 +181,6 @@
                                    class="btn btn-solid"
                                    [class.disabled]="counter > product.stock"
                                    >Buy now with Econt</a>
-<!--                                <a style="user-select: none;display: inline-block;text-decoration: none;background-color: #234182;border-radius: 40px;line-height: 43px;padding: 0 40px;color: #fff;font-weight: 400;font-size: 15px;box-shadow: 0 2px 2px 0 rgba(33,33,33,.24);" href="javascript:window.open('https://delivery.econt.com/checkout.php?id_shop=4904065&currency=BGN&items%5B0%5D%5Bname%5D=Camo%20pants&items%5B0%5D%5BSKU%5D=44uMGdRPqwGOh5CeRKNP&items%5B0%5D%5BURL%5D=&items%5B0%5D%5BimageURL%5D=https%3A%2F%2Ffirebasestorage.googleapis.com%2Fv0%2Fb%2Fdrippy-shop-7d116.appspot.com%2Fo%2Fimages%252F1600625018304_118308719_137987007997422_4322268799324026804_o.jpg%3Falt%3Dmedia%26amp%3Btoken%3D9fa2b75b-cc48-4480-949b-fbd4684377b5&items%5B0%5D%5Bcount%5D=1&items%5B0%5D%5BtotalWeight%5D=0%2C2&items%5B0%5D%5BhasAdditionalDetails%5D=1&items%5B0%5D%5BtotalPrice%5D=50&items%5B0%5D%5BhideCount%5D=1','econt-delivery-order','width=600,height=840')" class="buy-with-econt">Достави с Еконт</a>-->
-<!--                                <a class="btn btn-solid" [class.disabled]="counter > product.stock"-->
-<!--                                   (click)="openCheckout()">Buy now with Econt</a>-->
-                                <!-- ФОРМА ЗА ДОСТАВКА -->
-<!--                                <iframe [class.disable]="!isCheckingOut" [src]="checkoutService.checkoutWithEcont([product])"></iframe>-->
-                                <!-- В това поле ще се запази уникалния индентификатор на адреса за доставка. Попълва се от Java Script функцията която 'слуша' съобщенията от формата за доставка -->
-<!--                                <input type="hidden" name="customerInfo[id]">-->
                                 <a *ngIf="auth.user$ | async as user" class="btn btn-solid" href="shop/product/set/{{product.id}}">Edit product</a>
 
 

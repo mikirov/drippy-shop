@@ -3,12 +3,6 @@
 <mat-dialog-content >
 <!-- ФОРМА ЗА ДОСТАВКА -->
     <iframe [src]="url | safe " allowfullscreen="allowfullscreen" frameborder="0" scrolling="no" height="800px" width="800px" ></iframe>
-
-    <!-- В това поле ще се запази уникалния индентификатор на адреса за доставка. Попълва се от Java Script функцията която 'слуша' съобщенията от формата за доставка -->
-    <input type="hidden" name="customerInfo">
-    <form type="hidden" name="cod">
-
-    </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancel</button>

@@ -119,8 +119,6 @@ export class ThreeColumnComponent {
         this.isCheckingOut = !this.isCheckingOut;
     }
 
-// добавяне на функция, която 'слуша' данни връщани от формите за доставка
-
 
     openCheckout() {
         const dialogRef = this.dialog.open(CheckoutComponent, {
@@ -134,7 +132,9 @@ export class ThreeColumnComponent {
         });
 
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog result: ${result}`);
+            console.log(result);
+            // TODO: post request to ekont
+            // this.http.post()
         });
     }
 
