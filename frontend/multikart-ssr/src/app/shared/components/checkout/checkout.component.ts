@@ -10,13 +10,15 @@ import {Product} from '../../models/product';
 })
 export class CheckoutComponent implements AfterViewInit {
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data, public dialogRef: MatDialogRef<CheckoutComponent>) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data,
+                public dialogRef: MatDialogRef<CheckoutComponent>,
+                public checkoutService: CheckoutService) {
     }
 
     codInput: HTMLInputElement;
     customerInfoIdInput: HTMLInputElement;
     confirmForm: HTMLFormElement;
-    url = 'http://delivery.demo.econt.com/customer_info.php';
+    // url = 'http://delivery.demo.econt.com/customer_info.php?%27id_shop%27=4904065&%27order_total%27=50&%27order_currency%27=BGN&%27order_weight%27=1';
 
 
     ngAfterViewInit(): void {

@@ -1,14 +1,5 @@
 {
   "projects": {
     "default": "drippy-shop-7d116"
-  },
-  "targets": {
-    "drippy-shop-7d116": {
-      "hosting": {
-        "multikart": [
-          "drippy-shop-7d116"
-        ]
-      }
-    }
   }
 }

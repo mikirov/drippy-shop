@@ -33,7 +33,7 @@ export class CheckoutService {
             });
         });
 
-        const url = 'http://delivery.econt.com/checkout.php?' + param(orderParams);
+        const url = 'https://delivery.econt.com/checkout.php?' + param(orderParams);
         return url;
         // window.location.href = url;
     }
