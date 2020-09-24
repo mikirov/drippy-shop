@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Product} from '../models/product';
 import param from 'jquery-param';
 
@@ -10,6 +10,10 @@ import param from 'jquery-param';
 export class CheckoutService {
 
     constructor(private http: HttpClient) {
+    }
+
+    openEcontCheckout(products: Product[]) {
+        window.open(this.checkoutWithEcont(products), 'econt-delivery-order', 'width=600,height=840');
     }
 
     checkoutWithEcont(products: Product[]) {
@@ -33,8 +37,6 @@ export class CheckoutService {
             });
         });
 
-        const url = 'https://delivery.econt.com/checkout.php?' + param(orderParams);
-        return url;
-        // window.location.href = url;
+        return 'https://delivery.econt.com/checkout.php?' + param(orderParams);
     }
 }

@@ -177,7 +177,7 @@
 <!--                                   [class.disabled]="counter > product.stock"-->
 <!--                                   (click)="buyNow(product)">buy now</a>-->
 
-                                <a *ngIf="checkoutUrl" (click)="openCheckout()"
+                                <a *ngIf="checkoutUrl" (click)="checkoutService.openEcontCheckout([this.product])"
                                    class="btn btn-solid"
                                    [class.disabled]="counter > product.stock"
                                    >Buy now with Econt</a>

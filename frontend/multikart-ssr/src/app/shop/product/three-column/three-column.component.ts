@@ -131,68 +131,8 @@ export class ThreeColumnComponent {
                 products: [this.product]
             }
         });
-
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-            // if (result.shipment_error) {
-            //     console.log(result.shipment_error);
-            //     return;
-            // }
-            // TODO: post request to ekont
-            const payload = {
-                id: '',
-                orderNumber: '',
-                status: '',
-                orderTime: new Date(),
-                cod: 1,
-                partialDelivery: 0,
-                currency: 'BGN',
-                shipmentDescription: 'дрехи',
-                shipmentNumber: '',
-                customerInfo: { // Type: CustomerInfo -> http://delivery.econt.com/services/#CustomerInfo
-                    id: result.id,
-                    name: result.name,
-                    face: result.face,
-                    phone: result.phone,
-                    'e-mail': result.email,
-                    countryCode: result.country_code,
-                    cityName: result.city_name,
-                    postCode: result.post_code,
-                    officeCode: result.office_code,
-                    zipCode: result.zip,
-                    address: result.address,
-                    priorityFrom: '',
-                    priorityTo: '',
-                },
-                items: [
-                    {
-                        name: this.product.name,
-                        SKU: this.product.id,
-                        URL: 'www.drippy.shop/shop/product/' + this.product.id,
-                        count: 1,
-                        hideCount: 1,
-                        totalPrice: this.product.price,
-                        totalWeight: 0.5
-                    }
-                ]
-            };
-            const httpOptions = {
-                headers: new HttpHeaders({
-                        'Content-Type': 'application/json',
-                        Authorization: environment.PRIVATE_KEY,
-                    },
-                )
-            };
-            this.http.post(environment.UPDATE_ORDER_ENDPOINT, payload, httpOptions)
-                .subscribe((response) => {
-                    console.log(response);
-                });
-        });
     }
 
-    openEcontCheckout() {
-        window.open(this.checkoutUrl, 'econt-delivery-order', 'width=600,height=840');
-    }
 
     private handleError(payload: any) {
 
