@@ -3,17 +3,33 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Product} from '../models/product';
 import param from 'jquery-param';
+import {CheckoutComponent} from "../components/checkout/checkout.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Injectable({
     providedIn: 'root'
 })
 export class CheckoutService {
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private dialog: MatDialog) {
     }
 
-    openEcontCheckout(products: Product[]) {
+    public openEcontCheckout(products: Product[]) {
         window.open(this.checkoutWithEcont(products), 'econt-delivery-order', 'width=600,height=840');
+    }
+
+    openDialog(products: Product[]) {
+        this.dialog.open(CheckoutComponent, {
+            width: '600px',
+            height: '840px',
+            data: {
+                products
+            }
+        });
+    }
+
+    userInfoEcont(){
+        return environment.SHIPPMENT_CALC_URL;
     }
 
     checkoutWithEcont(products: Product[]) {

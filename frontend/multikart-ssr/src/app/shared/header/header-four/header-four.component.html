@@ -7,8 +7,8 @@
                 <div class="col-lg-6">
                     <div class="header-contact">
                         <ul>
-                            <li>Welcome to Our store Drippy shop</li>
-                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call Us: 0886991516</li>
+                            <li>{{'topbar-title' | translate}}</li>
+<!--                            <li><i class="fa fa-phone" aria-hidden="true"></i>{{'call-us' | translate}}: 0886991516</li>-->
                         </ul>
                     </div>
                 </div>
@@ -16,10 +16,10 @@
                     <ul class="header-dropdown">
                         <li class="compare">
                             <a [routerLink]="['/shop/compare']"><i class="fa fa-random"
-                                                                   aria-hidden="true"></i>Compare</a>
+                                                                   aria-hidden="true"></i>{{'compare' | translate}}</a>
                         </li>
                         <li class="mobile-wishlist">
-                            <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>Wishlist</a>
+                            <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>{{"wishlist" | translate}}</a>
                         </li>
 
                         <div *ngIf="auth.user$ | async; then authenticated else guest">
@@ -38,14 +38,17 @@
                         <ng-template #authenticated>
 
                             <li *ngIf="auth.user$ | async as user" class="onhover-dropdown mobile-account">
-                                <i class="fa fa-user" aria-hidden="true"></i> My Account
+                                <i class="fa fa-user" aria-hidden="true"></i> {{"my-account" | translate}}
                                 <ul class="onhover-show-div">
 
                                     <li>
-                                        <a (click)="auth.signOut()">Logout</a>
+                                        <a (click)="auth.signOut()">{{"logout" | translate}}</a>
                                     </li>
                                     <li *ngIf="user.admin">
                                         <a href="/shop/product/set">Create product</a>
+                                    </li>
+                                    <li>
+                                        <a href="/orders"></a>
                                     </li>
                                 </ul>
                             </li>
@@ -68,12 +71,46 @@
                         </a>
                     </div>
                     <div>
-                        <form class="form_search" role="form">
-                            <input id="query search-autocomplete" type="search"  placeholder="Find the best for your..." class="nav-search nav-search-field" aria-expanded="true">
-                            <button type="button" name="nav-submit-button" class="btn-search">
-                                <i class="ti-search"></i>
-                            </button>
-                        </form>
+<!--                        <form class="form_search" role="form">-->
+<!--                            <input id="query search-autocomplete" type="search"  placeholder="Find the best for your..." class="nav-search nav-search-field" aria-expanded="true">-->
+<!--                            <button type="button" name="nav-submit-button" class="btn-search">-->
+<!--                                <i class="ti-search"></i>-->
+<!--                            </button>-->
+<!--                        </form>-->
+                        <ais-instantsearch
+                                [config]="{
+                                    apiKey: '31130c5b2e8e59feb112a1be559f9c27',
+                                    appId: 'D8SHSLF83H',
+                                    indexName: 'products',
+                                    routing: true
+                                  }">
+
+                            <ais-search-box></ais-search-box>
+                            <ais-hits>
+                                <ng-template let-hits="hits" let-results="results">
+                                    <div *ngIf="hits.length === 0">
+                                        No results found matching <strong>{{results.query}}</strong>.
+                                    </div>
+
+                                    <div *ngIf="results.query">
+                                        <div *ngFor="let hit of hits" class="content" >
+<!--                                            TODO: show products better-->
+                                            <a [href]="'/shop/' + hit.id">
+<!--                                                <img [src]="hit.urls[0]">-->
+                                                <section>
+
+                                                    <app-product-preview [product]="hit"></app-product-preview>
+<!--                                                    <img [src]="hit.urls[0]" style="max-width: 200px; max-height: 200px;">-->
+<!--                                                    <h3>{{hit.name}} {{hit.price}}</h3>-->
+                                                    <ais-highlight attribute="bio" [hit]="hit">
+                                                    </ais-highlight>
+                                                </section>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </ais-hits>
+                        </ais-instantsearch>
                     </div>
                     <div class="menu-right pull-right">
                         <app-settings></app-settings>

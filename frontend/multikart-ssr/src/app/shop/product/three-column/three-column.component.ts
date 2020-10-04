@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetailsMainSlider, ProductDetailsThumbSlider} from '../../../shared/data/slider';
 import {Product} from '../../../shared/models/product';
@@ -9,9 +9,10 @@ import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {AuthService} from '../../../shared/services/auth.service';
 import {CheckoutService} from '../../../shared/services/checkout.service';
+import {OrderService} from '../../../shared/services/order.service';
+import {User} from '../../../shared/models/user';
 import {MatDialog} from '@angular/material/dialog';
 import {CheckoutComponent} from '../../../shared/components/checkout/checkout.component';
-import {catchError} from 'rxjs/operators';
 
 @Component({
     selector: 'app-three-column',
@@ -21,12 +22,11 @@ import {catchError} from 'rxjs/operators';
 
 export class ThreeColumnComponent {
 
-
     checkoutUrl = '';
 
     constructor(private route: ActivatedRoute, private router: Router,
                 public productService: ProductService, public checkoutService: CheckoutService, public auth: AuthService,
-                public dialog: MatDialog, private http: HttpClient) {
+                private http: HttpClient, private orderService: OrderService) {
 
         const productId = this.route.snapshot.paramMap.get('id');
         if (productId) {
@@ -35,14 +35,20 @@ export class ThreeColumnComponent {
                 this.product = product;
                 this.checkoutUrl = this.checkoutService.checkoutWithEcont([product]);
             });
+
         } else {
             this.router.navigateByUrl('pages/404', {skipLocationChange: true});
         }
+        this.auth.user$.subscribe((user) => {
+            this.user = user;
+        });
+
     }
 
 
     public product$: Observable<Product>;
     public product: Product;
+    private user: User;
     public counter = 1;
     public activeSlide: any = 0;
     public selectedSize: any;
@@ -53,6 +59,7 @@ export class ThreeColumnComponent {
 
     public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
     public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
+
 
 
     // Get Product Color
@@ -121,19 +128,6 @@ export class ThreeColumnComponent {
     }
 
 
-    openCheckout() {
-        const dialogRef = this.dialog.open(CheckoutComponent, {
-            width: 'auto',
-            height: 'auto',
-            maxHeight: '100%',
-            maxWidth: '100%',
-            data: {
-                products: [this.product]
-            }
-        });
-    }
-
-
     private handleError(payload: any) {
 
         // tslint:disable-next-line:only-arrow-functions ban-types
@@ -141,4 +135,5 @@ export class ThreeColumnComponent {
             return undefined;
         };
     }
+
 }

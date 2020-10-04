@@ -1,5 +1,5 @@
 {
-  "topbar-title": "Welcome to Our store Multikart",
+  "topbar-title": "Welcome to Our store Drippy shop",
   "call-us": "Call Us",
   "home": "home",
   "shop": "Shop",
@@ -10,8 +10,6 @@
   "blogs": "Blogs",
   "clothing": "Clothing",
   "fashion-01": "Fashion 01",
-  "fashion-02": "Fashion 02",
-  "fashion-03": "Fashion 03",
   "vegetable": "vegetable",
   "watch": "watch",
   "furniture": "furniture",
@@ -76,11 +74,14 @@
   "forget-password": "forget password",
   "contact": "contact",
   "checkout": "checkout",
-  "compare": "compare",
+  "checkout-with-econt": "Checkout with Econt",
+  "compare": "Compare",
   "compare-1": "compare 1",
   "compare-2": "compare 2",
   "coming-soon": "coming soon",
   "dashboard": "Dashboard",
   "FAQ": "FAQ",
-  "blog-details": "blog details"
+  "blog-details": "blog details",
+  "my-account": "My account",
+  "special-offer": "special offer"
 }

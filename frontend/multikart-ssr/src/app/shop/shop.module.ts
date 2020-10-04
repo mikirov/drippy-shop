@@ -29,6 +29,7 @@ import {PriceComponent} from './collection/widgets/price/price.component';
 import {CartComponent} from './cart/cart.component';
 import {WishlistComponent} from './wishlist/wishlist.component';
 import {CompareComponent} from './compare/compare.component';
+import {NgAisModule} from "angular-instantsearch";
 
 @NgModule({
     declarations: [
@@ -50,11 +51,13 @@ import {CompareComponent} from './compare/compare.component';
         CompareComponent,
     ],
     imports: [
+        SharedModule,
         CommonModule,
         NgxPayPalModule,
         Ng5SliderModule,
         SharedModule,
-        ShopRoutingModule
+        ShopRoutingModule,
+        NgAisModule
     ]
 })
 export class ShopModule {

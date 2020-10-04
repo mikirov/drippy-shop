@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {PreviewProduct} from '../../../shared/models/product';
+import {PreviewProduct} from '../../models/product';
 
 @Component({
   selector: 'app-product-preview',
@@ -7,8 +7,6 @@ import {PreviewProduct} from '../../../shared/models/product';
   styleUrls: ['./product-preview.component.scss']
 })
 export class ProductPreviewComponent implements OnInit {
-
-
 
   @Input() product: PreviewProduct;
 

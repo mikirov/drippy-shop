@@ -1,11 +1,2 @@
 
-<h2 mat-dialog-title>Checkout with Econt</h2>
-<mat-dialog-content >
-<!-- ФОРМА ЗА ДОСТАВКА -->
-    <iframe [src]="checkoutService.checkoutWithEcont(data.products) | safe " allowfullscreen="allowfullscreen" frameborder="0" scrolling="no" height="800px" width="800px" ></iframe>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Finish</button>
-</mat-dialog-actions>
-
+<iframe [src]="this.checkoutService.userInfoEcont() | safe" frameBorder="0" scrolling="no" width="500px" height="740px"></iframe>

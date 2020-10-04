@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>Search products</h1>
+<div mat-dialog-content>
+    <ais-instantsearch
+            [config]="{
+                            apiKey: '31130c5b2e8e59feb112a1be559f9c27',
+                            appId: 'D8SHSLF83H',
+                            indexName: 'products',
+                            routing: true
+                                  }">
+
+        <ais-search-box   placeholder="Search for products ..."
+                          submitTitle="Search"
+                          resetTitle="Reset"
+                          [searchAsYouType]="true"
+                          [autofocus]="true"></ais-search-box>
+        <ais-hits>
+            <ng-template let-hits="hits" let-results="results">
+                <div *ngIf="hits.length === 0">
+                    No results found matching <strong>{{results.query}}</strong>.
+                </div>
+
+                <div *ngIf="results.query" class="row no-slider">
+                    <div *ngFor="let hit of hits" class="product-box col-lg-3">
+                    <a (click)="navigateToEntity(hit.id)">
+                        <app-product-box-one
+                                [product]="hit"
+                                [currency]="productService?.Currency"
+                                [thumbnail]="true"
+                                [cartModal]="true">
+                        </app-product-box-one>
+                    </a>
+
+
+                        <!--                        <ais-highlight attribute="bio" [hit]="hit">-->
+                        <!--                        </ais-highlight>-->
+                    </div>
+
+                    <!--                            <app-product-preview [product]="hit"></app-product-preview>-->
+
+
+                </div>
+
+
+            </ng-template>
+        </ais-hits>
+    </ais-instantsearch>
+</div>
+<div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+</div>

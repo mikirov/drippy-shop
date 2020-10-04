@@ -24,6 +24,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import 'hammerjs';
 import 'mousetrap';
 
+import { NgAisModule } from 'angular-instantsearch';
+
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -68,6 +71,7 @@ const config = {
             deps: [HttpClient]
         }
     }),
+    NgAisModule.forRoot(),
     SharedModule,
     AppRoutingModule,
     AngularFireAuthModule
@@ -76,3 +80,8 @@ const config = {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+// required for AOT compilation
+// export function HttpLoaderFactory(http: HttpClient) {
+//   return new TranslateHttpLoader(http);
+// }

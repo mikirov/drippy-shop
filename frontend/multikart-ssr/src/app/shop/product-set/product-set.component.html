@@ -84,7 +84,7 @@
                     </mat-error>
 
                 </mat-form-field>
-                <mat-form-field class="form-field" hintLabel="Product Discount" i18n-hintlabel="product discount">
+                <mat-form-field class="form-field" hintLabel="Product Discount percent" i18n-hintlabel="product discount percent">
                     <input #productDiscount
                            formControlName="discount"
                            matInput
@@ -92,7 +92,7 @@
                            placeholder="discount"
                            type="number">
                     <mat-error *ngIf="productForm.controls['discount'].hasError('required') ">
-                        Product discount is <strong>required</strong>
+                        Product discount percent is <strong>required</strong>
                     </mat-error>
                 </mat-form-field>
 
@@ -111,28 +111,40 @@
                     </mat-chip-list>
                 </mat-form-field>
 
-                <mat-form-field>
-                    <mat-chip-list #chipListCollection aria-label="collection selection">
-                        <mat-chip *ngFor="let collection of collections" [selectable]="false"
-                                  [removable]="true" (removed)="removeCollection(collection)">
+                <mat-form-field class="example-chip-list">
+                    <mat-chip-list #chipList aria-label="collection selection">
+                        <mat-chip
+                                *ngFor="let collection of collections"
+                                [selectable]="true"
+                                [removable]="true"
+                                (removed)="removeCollection(collection)">
                             {{collection}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
+                            <mat-icon matChipRemove >cancel</mat-icon>
                         </mat-chip>
-                        <input placeholder="New collection..."
-                               [matChipInputFor]="chipListCollection"
-                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                               [matChipInputAddOnBlur]="true"
-                               (matChipInputTokenEnd)="addCollection($event)">
+                        <input
+                                placeholder="New collection..."
+                                #collectionInput
+                                [formControl]="collectionCtrl"
+                                [matAutocomplete]="auto"
+                                [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                (matChipInputTokenEnd)="addCollection($event)">
                     </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let collection of filteredCollections | async" [value]="collection">
+                            {{collection}}
+                        </mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
 
-                <mat-checkbox [checked]="productNew">Product is new</mat-checkbox>
-                <mat-checkbox [checked]="productSale">Product is on sale</mat-checkbox>
+
+                <mat-checkbox formControlName="new" #productNew (change)="setProductNew(productNew.checked)" >Product is new</mat-checkbox>
+                <mat-checkbox formControlName="sale" #productSale (change)="setProductSale(productSale.checked)" >Product is on sale</mat-checkbox>
 
 
                 <mat-form-field appearance="outline">
                     <mat-label>Product Type</mat-label>
-                    <mat-select (selectionChange)="setType($event)">
+                    <mat-select formControlName="type" (selectionChange)="setType($event)">
                         <mat-option value="T-shirt">T-shirt</mat-option>
                         <mat-option value="Hoodie">Hoodie</mat-option>
                         <mat-option value="Belt">Belt</mat-option>
@@ -140,16 +152,24 @@
                         <mat-option value="Skirt">Skirt</mat-option>
                         <mat-option value="Dress">Dress</mat-option>
                         <mat-option value="Kimono">Kimono</mat-option>
+                        <mat-option value="Top">Top</mat-option>
+                        <mat-option value="Body">Body</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="productForm.controls['type'].hasError('required') ">
+                        Product type is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Product category</mat-label>
-                    <mat-select (selectionChange)="setCategory($event)">
+                    <mat-select  formControlName="category" (selectionChange)="setCategory($event)">
                         <mat-option value="Women">Women</mat-option>
                         <mat-option value="Men">Men</mat-option>
                         <mat-option value="Accessories">Accessories</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="productForm.controls['category'].hasError('required') ">
+                        Product category is <strong>required</strong>
+                    </mat-error>
                 </mat-form-field>
 
 
@@ -187,9 +207,10 @@
             </div>
         </mat-step>
         <mat-step i18n-label="Create variants" label="Create variants">
+            {{this.variants | async | json}}
             <div style="align-self: center">
                 <form [formGroup]="variantForm">
-                    <mat-radio-group (change)="setVariationSize($event)" aria-label="Product size">
+                    <mat-radio-group #variationSize (change)="setVariationSize($event)" aria-label="Product size" formControlName="size">
                         <mat-radio-button value="Universal">Universal</mat-radio-button>
                         <mat-radio-button value="XS">XS</mat-radio-button>
                         <mat-radio-button value="S">S</mat-radio-button>
@@ -219,13 +240,14 @@
                         <input #variationImage
                                formControlName="imageIndex"
                                matInput
+                               type="number"
                                i18n-placeholder="variation image" placeholder="variation image index" type="number">
                         <mat-hint i18n="variant image">
                             Image number associated with variant
                         </mat-hint>
                     </mat-form-field>
 
-                    <button mat-raised-button (click)="addVariation(variationColor.value, variationImage.value)">Add variant</button>
+                    <button mat-raised-button (click)="addVariation( variationColor.value, variationImage.value)">Add variant</button>
 
                 </form>
 

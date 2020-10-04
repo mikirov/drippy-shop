@@ -24,7 +24,8 @@
               "hammerjs",
               "rxjs/operators",
               "rxjs/Subject",
-              "rxjs/Subscription"
+              "rxjs/Subscription",
+              "lodash"
             ],
             "outputPath": "dist/multikart/browser",
             "index": "src/index.html",
@@ -40,7 +41,9 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/font-awesome/scss/font-awesome.scss",
               "src/assets/scss/app.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/angular-instantsearch/bundles/instantsearch.min.css",
+              "node_modules/angular-instantsearch/bundles/instantsearch-theme-algolia.min.css",
             ],
             "scripts": [
               "node_modules/isotope-layout/dist/isotope.pkgd.min.js"
@@ -108,6 +111,8 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/angular-instantsearch/bundles/instantsearch.min.css",
+              "node_modules/angular-instantsearch/bundles/instantsearch-theme-algolia.min.css",
               "src/styles.scss"
             ],
             "scripts": []
