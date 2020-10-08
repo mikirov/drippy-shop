@@ -6,6 +6,7 @@ import {CheckoutService} from '../../services/checkout.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.prod';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-checkout',
@@ -17,7 +18,7 @@ export class CheckoutComponent implements OnInit {
     constructor(public dialogRef: MatDialogRef<CheckoutComponent>,
                 @Inject(MAT_DIALOG_DATA) public data, private orderService: OrderService,
                 private auth: AuthService, public checkoutService: CheckoutService,
-                private http: HttpClient, private router: Router) {
+                private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {
 
     }
 
@@ -81,8 +82,9 @@ export class CheckoutComponent implements OnInit {
 
         const orderId = await this.orderService.create(this.data.products.map((product) => product.id), this.user);
         console.log('Created order with id:' + orderId);
+        this.snackBar.open('Order successfully created', 'Okay');
         this.dialogRef.close();
-        this.router.navigateByUrl('/home', );
+
     }
 
 

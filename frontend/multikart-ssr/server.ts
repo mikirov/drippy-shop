@@ -5,7 +5,7 @@ import '@angular/localize/init';
 import 'zone.js/dist/zone-node';
 
 // Refrence Error Event Not Found Solution
-global['Event'] = null;
+global.Event = null;
 
 // Refrence Error Window Not found  solution
 const domino = require('domino');
@@ -13,13 +13,13 @@ const fs = require('fs');
 const path = require('path');
 const template = fs.readFileSync(path.join(__dirname, '../', '', 'browser/index.html')).toString();
 const win = domino.createWindow(template);
-global['window'] = win;
-global['document'] = win.document;
-global['navigator'] = win.navigator;
+// global.window = win;
+// global.document = win.document;
+// global.navigator = win.navigator;
 
 // Refrence Error localStorage Not found  solution
-import 'localstorage-polyfill'
-global['localStorage'] = localStorage;
+import 'localstorage-polyfill';
+// global.localStorage = localStorage;
 
 import { enableProdMode } from '@angular/core';
 
@@ -61,10 +61,10 @@ export function app() {
 
   // All regular routes use the Universal engine
   server.get('*', (req, res) => {
-    res.render(indexHtml, { req, 
-      providers: [{ 
+    res.render(indexHtml, { req,
+      providers: [{
         provide: APP_BASE_HREF,
-        useValue: req.baseUrl 
+        useValue: req.baseUrl
       }]
     });
   });

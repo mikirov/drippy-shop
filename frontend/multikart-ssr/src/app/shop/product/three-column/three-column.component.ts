@@ -119,6 +119,7 @@ export class ThreeColumnComponent {
     }
 
     // Add to Wishlist
+    currentUrl: string = window.location.href;
     addToWishlist(product: any) {
         this.productService.addToWishlist(product);
     }

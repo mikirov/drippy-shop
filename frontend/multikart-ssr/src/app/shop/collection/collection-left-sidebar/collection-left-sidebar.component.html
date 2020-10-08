@@ -20,6 +20,7 @@
                         <!-- side-bar colleps block stat -->
                         <div class="collection-filter-block">
                             <!-- brand filter start -->
+<!--                            <ais-refinement-list attribute="brand"></ais-refinement-list>-->
                             <app-brands [products]="products" [brands]="brands" (brandsFilter)="updateFilter($event)">
                             </app-brands>
 <!--                            // TODO: decide if color variation should exist-->
@@ -29,6 +30,16 @@
                             <!-- size filter start here -->
                             <app-size [products]="products" [size]="size" (sizeFilter)="updateFilter($event)">
                             </app-size>
+
+<!--                            <div class="collection-collapse-block border-0" [class.open]="collapse">-->
+<!--                                <h3 class="collapse-block-title" (click)="collapse = !collapse">price</h3>-->
+<!--                                <div class="collection-collapse-block-content">-->
+<!--                                    <div class="collection-brand-filter">-->
+<!--                                        <div class="mt-2">-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
                             <!-- price filter start here -->
                             <app-price [min]="minPrice" [max]="maxPrice" (priceFilter)="updateFilter($event)">
                             </app-price>

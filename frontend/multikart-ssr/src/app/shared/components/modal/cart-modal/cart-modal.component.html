@@ -22,7 +22,7 @@
                                 </a>
                                 <div class="buttons">
                                     <a [routerLink]="['/shop/cart']" class="view-cart btn btn-solid">Your cart</a>
-                                    <a [routerLink]="['/shop/checkout']" class="checkout btn btn-solid">Check out</a>
+                                    <a (click)="checkoutService.openDialog([product])" class="checkout btn btn-solid">Check out</a>
                                     <a [routerLink]="['/shop/collection/left/sidebar']" class="continue btn btn-solid">Continue shopping</a>
                                 </div>
 

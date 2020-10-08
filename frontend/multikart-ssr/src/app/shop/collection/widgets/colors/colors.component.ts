@@ -22,7 +22,7 @@ export class ColorsComponent implements OnInit {
     }
 
     get filterbycolor() {
-        const uniqueColors = []
+        const uniqueColors = [];
         this.products.filter((product) => {
             product.variants.filter((variant) => {
                 if (variant.color) {
@@ -44,6 +44,7 @@ export class ColorsComponent implements OnInit {
         }  // removed in array unchecked value
 
         const colors = this.colors.length ? {color: this.colors.join(',')} : {color: null};
+        console.log(colors);
         this.colorsFilter.emit(colors);
     }
 

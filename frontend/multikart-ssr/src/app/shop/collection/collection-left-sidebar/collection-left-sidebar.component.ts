@@ -49,7 +49,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
                 this.products = this.productService.sortProducts(response, this.sortBy);
                 // Category Filter
                 if (params.category) {
-                    this.products = this.products.filter(item => item.type === this.category);
+                    this.products = this.products.filter(item => item.category === this.category);
                 }
                 // Price Filter
                 this.products = this.products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice);
@@ -148,7 +148,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
     // Change Layout View
     updateLayoutView(value: string) {
         this.layoutView = value;
-        if (value == 'list-view') {
+        if (value === 'list-view') {
             this.grid = 'col-lg-12';
         }
         else {

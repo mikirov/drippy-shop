@@ -29,7 +29,6 @@ import {PriceComponent} from './collection/widgets/price/price.component';
 import {CartComponent} from './cart/cart.component';
 import {WishlistComponent} from './wishlist/wishlist.component';
 import {CompareComponent} from './compare/compare.component';
-import {NgAisModule} from "angular-instantsearch";
 
 @NgModule({
     declarations: [
@@ -57,7 +56,6 @@ import {NgAisModule} from "angular-instantsearch";
         Ng5SliderModule,
         SharedModule,
         ShopRoutingModule,
-        NgAisModule
     ]
 })
 export class ShopModule {

@@ -96,20 +96,20 @@
                     </mat-error>
                 </mat-form-field>
 
-                <mat-form-field>
-                    <mat-chip-list #chipListTag aria-label="tag selection">
-                        <mat-chip *ngFor="let tag of tags" [selectable]="false"
-                                  [removable]="true" (removed)="removeTag(tag)">
-                            {{tag}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                        <input placeholder="New tag..."
-                               [matChipInputFor]="chipListTag"
-                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                               [matChipInputAddOnBlur]="true"
-                               (matChipInputTokenEnd)="addTag($event)">
-                    </mat-chip-list>
-                </mat-form-field>
+<!--                <mat-form-field>-->
+<!--                    <mat-chip-list #chipListTag aria-label="tag selection">-->
+<!--                        <mat-chip *ngFor="let tag of tags" [selectable]="false"-->
+<!--                                  [removable]="true" (removed)="removeTag(tag)">-->
+<!--                            {{tag}}-->
+<!--                            <mat-icon matChipRemove>cancel</mat-icon>-->
+<!--                        </mat-chip>-->
+<!--                        <input placeholder="New tag..."-->
+<!--                               [matChipInputFor]="chipListTag"-->
+<!--                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+<!--                               [matChipInputAddOnBlur]="true"-->
+<!--                               (matChipInputTokenEnd)="addTag($event)">-->
+<!--                    </mat-chip-list>-->
+<!--                </mat-form-field>-->
 
                 <mat-form-field class="example-chip-list">
                     <mat-chip-list #chipList aria-label="collection selection">
