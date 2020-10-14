@@ -37,7 +37,6 @@ import {CartModalComponent} from './components/modal/cart-modal/cart-modal.compo
 import {CartVariationComponent} from './components/modal/cart-variation/cart-variation.component';
 import {VideoModalComponent} from './components/modal/video-modal/video-modal.component';
 import {SizeModalComponent} from './components/modal/size-modal/size-modal.component';
-import {AgeVerificationComponent} from './components/modal/age-verification/age-verification.component';
 
 // Skeleton Loader Components
 import {SkeletonProductBoxComponent} from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
@@ -55,12 +54,12 @@ import {NgAisModule} from 'angular-instantsearch';
 import {CheckoutComponent} from './components/checkout/checkout.component';
 import {ProductPreviewComponent} from './components/product-preview/product-preview.component';
 import {ImagePreviewComponent} from './components/image-preview/image-preview.component';
-import {NgxDropzoneModule} from "ngx-dropzone";
-import {DragDropModule} from "@angular/cdk/drag-drop";
-import {ImageCropperModule} from "ngx-img-cropper";
-import {AgmCoreModule} from "@agm/core";
-import {FormlyMaterialModule} from "@ngx-formly/material";
-import {FormlyModule} from "@ngx-formly/core";
+import {NgxDropzoneModule} from 'ngx-dropzone';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {ImageCropperModule} from 'ngx-img-cropper';
+import {AgmCoreModule} from '@agm/core';
+import {FormlyMaterialModule} from '@ngx-formly/material';
+import {FormlyModule} from '@ngx-formly/core';
 import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
@@ -91,7 +90,6 @@ import { SearchComponent } from './components/search/search.component';
         CartVariationComponent,
         VideoModalComponent,
         SizeModalComponent,
-        AgeVerificationComponent,
         SkeletonProductBoxComponent,
         TapToTopComponent,
         DiscountPipe,
@@ -164,7 +162,6 @@ import { SearchComponent } from './components/search/search.component';
         CartVariationComponent,
         VideoModalComponent,
         SizeModalComponent,
-        AgeVerificationComponent,
         SkeletonProductBoxComponent,
         TapToTopComponent,
         DiscountPipe,

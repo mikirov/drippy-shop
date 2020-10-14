@@ -6,6 +6,7 @@ export interface PreviewProduct {
     urls: string[];
 }
 
+
 export class Product implements PreviewProduct{
 
     // sellerUid: string;
@@ -30,6 +31,12 @@ export class Product implements PreviewProduct{
     quantity?: number; // done
     tags?: any[]; // done
     variants?: Variants[];
+    archived?: boolean;
+}
+
+export class WishlistProduct extends Product{
+    userId: string;
+    product: Product;
 }
 
 export interface Variants {

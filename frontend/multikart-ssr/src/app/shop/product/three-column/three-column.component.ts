@@ -22,8 +22,6 @@ import {CheckoutComponent} from '../../../shared/components/checkout/checkout.co
 
 export class ThreeColumnComponent {
 
-    checkoutUrl = '';
-
     constructor(private route: ActivatedRoute, private router: Router,
                 public productService: ProductService, public checkoutService: CheckoutService, public auth: AuthService,
                 private http: HttpClient, private orderService: OrderService) {
@@ -45,6 +43,8 @@ export class ThreeColumnComponent {
 
     }
 
+    checkoutUrl = '';
+
 
     public product$: Observable<Product>;
     public product: Product;
@@ -60,6 +60,8 @@ export class ThreeColumnComponent {
     public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
     public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
 
+    // Add to Wishlist
+    currentUrl: string = window.location.href;
 
 
     // Get Product Color
@@ -118,10 +120,10 @@ export class ThreeColumnComponent {
         }
     }
 
-    // Add to Wishlist
-    currentUrl: string = window.location.href;
     addToWishlist(product: any) {
-        this.productService.addToWishlist(product);
+        if (this.user) {
+            this.productService.addToWishlist(product);
+        }
     }
 
     setCheckingOut() {
@@ -132,7 +134,7 @@ export class ThreeColumnComponent {
     private handleError(payload: any) {
 
         // tslint:disable-next-line:only-arrow-functions ban-types
-        return function(p1: any, p2: Observable<Object>) {
+        return function (p1: any, p2: Observable<Object>) {
             return undefined;
         };
     }

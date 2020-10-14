@@ -4,9 +4,9 @@ import {
 } from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
 import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProductService} from "../../../services/product.service";
-import {Product} from "../../../models/product";
-import {CheckoutService} from "../../../services/checkout.service";
+import {ProductService} from '../../../services/product.service';
+import {Product} from '../../../models/product';
+import {CheckoutService} from '../../../services/checkout.service';
 
 @Component({
     selector: 'app-cart-modal',
@@ -22,9 +22,9 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     public closeResult: string;
     public modalOpen = false;
-    public products: any[] = [];
+    public products: Product[] = [];
 
-  // tslint:disable-next-line:ban-types
+    // tslint:disable-next-line:ban-types
     constructor(@Inject(PLATFORM_ID) private platformId: Object,
                 private modalService: NgbModal,
                 private productService: ProductService,
@@ -39,7 +39,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     async openModal(product) {
         await this.productService.getProducts.subscribe(response => this.products = response);
-        this.products = await this.products.filter(items => items.category == product.category && items.id != product.id);
+        this.products = await this.products.filter(items => items.category === product.category && items.id !== product.id);
         const status = await this.productService.addToCart(product);
         if (status) {
             this.modalOpen = true;
@@ -50,7 +50,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
                     centered: true,
                     windowClass: 'theme-modal cart-modal CartModal'
                 }).result.then((result) => {
-                  // tslint:disable-next-line:no-unused-expression
+                    // tslint:disable-next-line:no-unused-expression
                     `Result ${result}`;
                 }, (reason) => {
                     this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -75,4 +75,8 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
+    openCheckoutDialog(product: Product) {
+        this.modalService.dismissAll();
+        this.checkoutService.openDialog([product]);
+    }
 }

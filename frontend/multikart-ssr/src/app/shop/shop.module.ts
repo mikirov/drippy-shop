@@ -29,6 +29,8 @@ import {PriceComponent} from './collection/widgets/price/price.component';
 import {CartComponent} from './cart/cart.component';
 import {WishlistComponent} from './wishlist/wishlist.component';
 import {CompareComponent} from './compare/compare.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import {VirtualScrollerModule} from 'ngx-virtual-scroller';
 
 @NgModule({
     declarations: [
@@ -48,6 +50,7 @@ import {CompareComponent} from './compare/compare.component';
         CartComponent,
         WishlistComponent,
         CompareComponent,
+        ProductListComponent,
     ],
     imports: [
         SharedModule,
@@ -56,6 +59,7 @@ import {CompareComponent} from './compare/compare.component';
         Ng5SliderModule,
         SharedModule,
         ShopRoutingModule,
+        VirtualScrollerModule,
     ]
 })
 export class ShopModule {
