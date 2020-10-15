@@ -1,0 +1,7 @@
+<h2 i18n="order this product" mat-dialog-title>Order this product</h2>
+<mat-dialog-content i18n="are you sure">Are you sure?</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close i18n="no">No</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [mat-dialog-close]="true" i18n="yes">Yes</button>
+</mat-dialog-actions>

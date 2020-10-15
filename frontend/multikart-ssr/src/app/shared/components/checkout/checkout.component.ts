@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Inject, OnInit, ViewChild} from '@angular/core';
 import {OrderService} from '../../services/order.service';
 import {AuthService} from '../../services/auth.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {CheckoutService} from '../../services/checkout.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../../environments/environment.prod';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
     selector: 'app-checkout',
@@ -18,7 +19,8 @@ export class CheckoutComponent implements OnInit {
     constructor(public dialogRef: MatDialogRef<CheckoutComponent>,
                 @Inject(MAT_DIALOG_DATA) public data, private orderService: OrderService,
                 private auth: AuthService, public checkoutService: CheckoutService,
-                private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {
+                private http: HttpClient, private router: Router, private snackBar: MatSnackBar,
+                private dialog: MatDialog,) {
 
     }
 
@@ -44,7 +46,14 @@ export class CheckoutComponent implements OnInit {
             alert(eventData.shipment_error);
             return;
         }
-        // TODO: post request to ekont
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+        const result = await dialogRef.afterClosed().toPromise();
+        console.log(result);
+        if (!result) {
+            return;
+        }
+        this.dialogRef.close();
+
         const payload = {
             id: '',
             orderNumber: '',
@@ -82,8 +91,8 @@ export class CheckoutComponent implements OnInit {
 
         const orderId = await this.orderService.create(this.data.products.map((product) => product.id), this.user);
         console.log('Created order with id:' + orderId);
-        this.snackBar.open('Order successfully created', 'Okay');
-        this.dialogRef.close();
+         this.snackBar.open('Order successfully created', 'Okay');
+        // this.dialogRef.close();
 
     }
 

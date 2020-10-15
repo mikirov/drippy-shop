@@ -55,13 +55,14 @@ import {NgAisModule} from 'angular-instantsearch';
 import {CheckoutComponent} from './components/checkout/checkout.component';
 import {ProductPreviewComponent} from './components/product-preview/product-preview.component';
 import {ImagePreviewComponent} from './components/image-preview/image-preview.component';
-import {NgxDropzoneModule} from "ngx-dropzone";
-import {DragDropModule} from "@angular/cdk/drag-drop";
-import {ImageCropperModule} from "ngx-img-cropper";
-import {AgmCoreModule} from "@agm/core";
-import {FormlyMaterialModule} from "@ngx-formly/material";
-import {FormlyModule} from "@ngx-formly/core";
+import {NgxDropzoneModule} from 'ngx-dropzone';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {ImageCropperModule} from 'ngx-img-cropper';
+import {AgmCoreModule} from '@agm/core';
+import {FormlyMaterialModule} from '@ngx-formly/material';
+import {FormlyModule} from '@ngx-formly/core';
 import { SearchComponent } from './components/search/search.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
     declarations: [
@@ -100,6 +101,7 @@ import { SearchComponent } from './components/search/search.component';
         ProductPreviewComponent,
         ImagePreviewComponent,
         SearchComponent,
+        ConfirmationDialogComponent,
     ],
     imports: [
         CommonModule,
