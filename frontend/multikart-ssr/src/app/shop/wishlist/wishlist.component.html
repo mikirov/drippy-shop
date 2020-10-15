@@ -73,7 +73,7 @@
     <div class="row wishlist-buttons" *ngIf='products.length'>
       <div class="col-12">
         <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
-        <a (click)="checkoutService.openDialog(products)" class="btn btn-solid">check out</a>
+        <a (click)="openDialog(products)" class="btn btn-solid">check out</a>
       </div>
     </div>
   </div>

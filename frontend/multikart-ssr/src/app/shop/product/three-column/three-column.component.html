@@ -81,7 +81,7 @@
                                    [class.disabled]="counter > product.stock"
                                    (click)="addToCart(product)">add to cart</a>
 
-                                <a *ngIf="checkoutUrl" (click)="this.checkoutService.openDialog([this.product])"
+                                <a *ngIf="checkoutUrl" (click)="openDialog([this.product])"
                                    class="btn btn-solid"
                                    [class.disabled]="counter > product.stock"
                                 >Buy now with Econt</a>

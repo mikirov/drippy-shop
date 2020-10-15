@@ -7,6 +7,8 @@ import {NgbModal, ModalDismissReasons, NgbActiveModal} from '@ng-bootstrap/ng-bo
 import {ProductService} from '../../../services/product.service';
 import {Product} from '../../../models/product';
 import {CheckoutService} from '../../../services/checkout.service';
+import {CheckoutComponent} from '../../checkout/checkout.component';
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
     selector: 'app-cart-modal',
@@ -28,7 +30,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(@Inject(PLATFORM_ID) private platformId: Object,
                 private modalService: NgbModal,
                 private productService: ProductService,
-                public checkoutService: CheckoutService) {
+                public dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -37,10 +39,10 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
     }
 
-    async openModal(product) {
-        await this.productService.getProducts.subscribe(response => this.products = response);
-        this.products = await this.products.filter(items => items.category === product.category && items.id !== product.id);
-        const status = await this.productService.addToCart(product);
+    openModal(product) {
+        this.productService.getProducts.subscribe(response => this.products = response);
+        this.products =  this.products.filter(items => items.category === product.category && items.id !== product.id);
+        const status = this.productService.addToCart(product);
         if (status) {
             this.modalOpen = true;
             if (isPlatformBrowser(this.platformId)) { // For SSR
@@ -75,8 +77,14 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
         }
     }
 
-    openCheckoutDialog(product: Product) {
+    openCheckoutDialog(products: Product[]) {
         this.modalService.dismissAll();
-        this.checkoutService.openDialog([product]);
+        this.dialog.open(CheckoutComponent, {
+            width: '600px',
+            height: '840px',
+            data: {
+                products
+            }
+        });
     }
 }

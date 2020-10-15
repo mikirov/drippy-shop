@@ -24,7 +24,7 @@ export class ThreeColumnComponent {
 
     constructor(private route: ActivatedRoute, private router: Router,
                 public productService: ProductService, public checkoutService: CheckoutService, public auth: AuthService,
-                private http: HttpClient, private orderService: OrderService) {
+                private http: HttpClient, private orderService: OrderService, private dialog: MatDialog) {
 
         const productId = this.route.snapshot.paramMap.get('id');
         if (productId) {
@@ -139,4 +139,13 @@ export class ThreeColumnComponent {
         };
     }
 
+    openDialog(products: Product[]) {
+        this.dialog.open(CheckoutComponent, {
+            width: '600px',
+            height: '840px',
+            data: {
+                products
+            }
+        });
+    }
 }

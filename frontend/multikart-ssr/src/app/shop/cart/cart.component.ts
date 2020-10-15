@@ -5,6 +5,7 @@ import {Product} from '../../shared/models/product';
 import {CheckoutService} from '../../shared/services/checkout.service';
 import {CheckoutComponent} from "../../shared/components/checkout/checkout.component";
 import {MatDialog} from '@angular/material/dialog';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'app-cart',
@@ -14,9 +15,30 @@ import {MatDialog} from '@angular/material/dialog';
 export class CartComponent implements OnInit {
 
     public products: Product[] = [];
+    private cartItems: Product[] = []
 
-    constructor(public productService: ProductService, public checkoutService: CheckoutService, private dialog: MatDialog) {
-        this.productService.cartItems.subscribe(response => this.products = response);
+    constructor(public productService: ProductService, public checkoutService: CheckoutService, private dialog: MatDialog,
+                private toastrService: ToastrService) {
+        this.productService.cartItems.subscribe(response => {
+
+            this.cartItems = response;
+
+            console.log(this.products);
+        });
+        this.productService.getProducts.subscribe(availableProducts => {
+            console.log(availableProducts);
+            this.products = availableProducts.filter(ap => {
+                if (ap.stock === 0) {
+                    return false;
+                }
+                for (const p of this.cartItems) {
+                    if (p.id === ap.id) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        });
     }
 
     ngOnInit(): void {
@@ -41,15 +63,6 @@ export class CartComponent implements OnInit {
     }
 
     checkoutProducts(products: Product[]) {
-        // TODO: get available products and popup that says that you can only checkout whats available
-        this.productService.getProducts.subscribe(availableProducts => {
-            products = products.filter(p => {
-              return availableProducts.find(ap => availableProducts.indexOf(p));
-            });
-        });
-        if (products.length === 0) {
-          alert('Product is no longer available');
-        }
         this.dialog.open(CheckoutComponent, {
             width: '600px',
             height: '840px',
