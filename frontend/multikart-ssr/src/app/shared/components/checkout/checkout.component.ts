@@ -15,6 +15,7 @@ import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-d
     styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
+    url = 'https://delivery.econt.com/customer_info.php';
 
     constructor(public dialogRef: MatDialogRef<CheckoutComponent>,
                 @Inject(MAT_DIALOG_DATA) public data, private orderService: OrderService,

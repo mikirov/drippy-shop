@@ -9,6 +9,7 @@ import {CollectionLeftSidebarComponent} from './collection/collection-left-sideb
 import {CartComponent} from './cart/cart.component';
 import {WishlistComponent} from './wishlist/wishlist.component';
 import {CompareComponent} from './compare/compare.component';
+import {ProductListComponent} from "./product-list/product-list.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
     {
         path: 'product/:id',
         component: ThreeColumnComponent,
+    },
+    {
+        path: 'products',
+        component: ProductListComponent,
     },
     {
         path: 'collection/left/sidebar',

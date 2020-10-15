@@ -37,7 +37,6 @@ import {CartModalComponent} from './components/modal/cart-modal/cart-modal.compo
 import {CartVariationComponent} from './components/modal/cart-variation/cart-variation.component';
 import {VideoModalComponent} from './components/modal/video-modal/video-modal.component';
 import {SizeModalComponent} from './components/modal/size-modal/size-modal.component';
-import {AgeVerificationComponent} from './components/modal/age-verification/age-verification.component';
 
 // Skeleton Loader Components
 import {SkeletonProductBoxComponent} from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
@@ -92,7 +91,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
         CartVariationComponent,
         VideoModalComponent,
         SizeModalComponent,
-        AgeVerificationComponent,
         SkeletonProductBoxComponent,
         TapToTopComponent,
         DiscountPipe,
@@ -166,7 +164,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
         CartVariationComponent,
         VideoModalComponent,
         SizeModalComponent,
-        AgeVerificationComponent,
         SkeletonProductBoxComponent,
         TapToTopComponent,
         DiscountPipe,
