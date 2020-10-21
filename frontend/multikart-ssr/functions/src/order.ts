@@ -14,10 +14,8 @@ export const updateProductStock = functions.firestore
             const productRef = db.doc(`products/${productId}`);
             const productSnap = await productRef.get();
             const productData = productSnap.data();
-            const shouldBeArchived = productData.stock === 0;
-            await productRef.update({
-                archived: shouldBeArchived,
-                stock: productData.stock - 1 > 0 ? productData.stock - 1 : 0
-            });
+            if(productData.stock === 0){
+                await productRef.delete();
+            }
         }
     });

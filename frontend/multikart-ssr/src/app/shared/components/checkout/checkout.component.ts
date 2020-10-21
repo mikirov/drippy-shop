@@ -19,9 +19,9 @@ export class CheckoutComponent implements OnInit {
 
     constructor(public dialogRef: MatDialogRef<CheckoutComponent>,
                 @Inject(MAT_DIALOG_DATA) public data, private orderService: OrderService,
-                private auth: AuthService, public checkoutService: CheckoutService,
+                private auth: AuthService,
                 private http: HttpClient, private router: Router, private snackBar: MatSnackBar,
-                private dialog: MatDialog,) {
+                private dialog: MatDialog) {
 
     }
 
@@ -92,7 +92,7 @@ export class CheckoutComponent implements OnInit {
 
         const orderId = await this.orderService.create(this.data.products.map((product) => product.id), this.user);
         console.log('Created order with id:' + orderId);
-         this.snackBar.open('Order successfully created', 'Okay');
+        this.snackBar.open('Order successfully created', 'Okay');
         // this.dialogRef.close();
 
     }

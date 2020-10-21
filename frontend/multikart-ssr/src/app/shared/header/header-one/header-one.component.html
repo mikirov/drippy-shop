@@ -18,18 +18,20 @@
                                                                    aria-hidden="true"></i>{{'compare' | translate}}</a>
                         </li>
                         <li class="mobile-wishlist">
-                            <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart" aria-hidden="true"></i>{{"wishlist" | translate}}</a>
+                            <a [routerLink]="['/shop/wishlist']"><i class="fa fa-heart"
+                                                                    aria-hidden="true"></i>{{"wishlist" | translate}}
+                            </a>
                         </li>
 
                         <div *ngIf="auth.user$ | async; then authenticated else guest">
                             <!-- template will replace this div -->
                         </div>
                         <ng-template #guest>
-                            <li>
-                                <a (click)="auth.googleSignin()">
-                                    Login <i  class="fa fa-google"></i>
-                                </a>
+                            <li class="mobile-account">
 
+                                <a (click)="auth.googleSignin()">
+                                    Login <i class="fa fa-google"></i>
+                                </a>
                             </li>
 
                         </ng-template>
@@ -65,8 +67,8 @@
             <div class="col-sm-12">
                 <div class="main-menu">
                     <div class="menu-left">
-                        <app-left-menu></app-left-menu>
-                        <div class="brand-logo">
+                        <!--                        <app-left-menu></app-left-menu>-->
+                        <div>
                             <a routerLink="/home/" id="headerlogo">
                                 <img [src]="themeLogo" class="img-fluid" alt="logo">
                             </a>
