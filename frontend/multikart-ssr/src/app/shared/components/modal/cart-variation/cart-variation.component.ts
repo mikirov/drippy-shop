@@ -10,7 +10,7 @@ import { Product } from "../../../models/product";
 })
 export class CartVariationComponent implements OnInit, OnDestroy {
 
-  @Input() direction: string = 'right'; // Default Direction Right
+  @Input() direction = 'right'; // Default Direction Right
 
   public products: Product[] = [];
 

@@ -49,7 +49,7 @@ export class CheckoutService {
                 count: 1, // закупени бройки (по избор, 1 по подразбиране)
                 hideCount: 1, // приема стойности 0 и 1. Служи за скриване на формата за промяна на количество.
                 totalWeight: 0.5, // общо тегло (тегло * брой)
-                totalPrice: product.price  // обща цена (ед. цена * брой)
+                totalPrice: (product.price * product.discount) / 100 // обща цена (ед. цена * брой)
             });
         });
 

@@ -53,6 +53,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
                 }
                 // Price Filter
                 this.products = this.products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice);
+
+                //Stock filter
+                this.products = this.products.filter(item => item.stock > 0);
                 // Paginate Products
                 this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
                 this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
@@ -150,8 +153,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.layoutView = value;
         if (value === 'list-view') {
             this.grid = 'col-lg-12';
-        }
-        else {
+        } else {
             this.grid = 'col-xl-3 col-md-6';
         }
     }

@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {forkJoin, Observable, combineLatest} from 'rxjs';
 import {ProductService} from '../../shared/services/product.service';
 import {Product} from '../../shared/models/product';
 import {CheckoutService} from '../../shared/services/checkout.service';
-import {CheckoutComponent} from "../../shared/components/checkout/checkout.component";
+import {CheckoutComponent} from '../../shared/components/checkout/checkout.component';
 import {MatDialog} from '@angular/material/dialog';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-cart',
@@ -15,30 +16,32 @@ import {ToastrService} from "ngx-toastr";
 export class CartComponent implements OnInit {
 
     public products: Product[] = [];
-    private cartItems: Product[] = []
 
     constructor(public productService: ProductService, public checkoutService: CheckoutService, private dialog: MatDialog,
-                private toastrService: ToastrService) {
-        this.productService.cartItems.subscribe(response => {
+                private toastrService: ToastrService, private router: Router) {
 
-            this.cartItems = response;
-
-            console.log(this.products);
-        });
-        this.productService.getProducts.subscribe(availableProducts => {
-            console.log(availableProducts);
-            this.products = availableProducts.filter(ap => {
-                if (ap.stock === 0) {
-                    return false;
-                }
-                for (const p of this.cartItems) {
-                    if (p.id === ap.id) {
-                        return true;
+        combineLatest(this.productService.getProducts, this.productService.cartItems)
+            .subscribe(([allProducts, cartItems]) => {
+                // const availableProducts = result[0];
+                // const cartItems = result[1];
+                // console.log(availableProducts);
+                // console.log(cartItems);
+                this.products = cartItems.filter(p => {
+                    if (p.stock === 0 || p.archived) {
+                        return false;
                     }
-                }
-                return false;
+                    for (const ap of allProducts) {
+                        if (p.id === ap.id) {
+                            if (ap.stock === 0 || ap.archived) {
+                                return false;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+                console.log(this.products);
             });
-        });
     }
 
     ngOnInit(): void {
@@ -62,12 +65,18 @@ export class CartComponent implements OnInit {
         this.productService.removeCartItem(product);
     }
 
-    checkoutProducts(products: Product[]) {
-        this.dialog.open(CheckoutComponent, {
+    async checkoutProducts(products: Product[]) {
+        const dialogRef = this.dialog.open(CheckoutComponent, {
             width: '600px',
             height: '840px',
             data: {
                 products
+            }
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+            if (result === 'success') {
+                this.products.forEach(p => this.productService.removeCartItem(p));
+                this.router.navigateByUrl('/home', {skipLocationChange: true});
             }
         });
     }

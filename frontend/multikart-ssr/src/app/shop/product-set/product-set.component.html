@@ -147,6 +147,7 @@
                     <mat-select formControlName="type" (selectionChange)="setType($event)">
                         <mat-option value="T-shirt">T-shirt</mat-option>
                         <mat-option value="Hoodie">Hoodie</mat-option>
+                        <mat-option value="Jacket">Jacket</mat-option>
                         <mat-option value="Belt">Belt</mat-option>
                         <mat-option value="Pants">Pants</mat-option>
                         <mat-option value="Skirt">Skirt</mat-option>
@@ -207,7 +208,7 @@
             </div>
         </mat-step>
         <mat-step i18n-label="Create variants" label="Create variants">
-            {{this.variants | async | json}}
+            {{this.variants | json}}
             <div style="align-self: center">
                 <form [formGroup]="variantForm">
                     <mat-radio-group #variationSize (change)="setVariationSize($event)" aria-label="Product size" formControlName="size">
@@ -235,7 +236,6 @@
                             Variant color is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
-
                     <mat-form-field class="form-field">
                         <input #variationImage
                                formControlName="imageIndex"

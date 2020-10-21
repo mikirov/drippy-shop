@@ -24,8 +24,8 @@
 
                     <div class="col-lg-6">
                         <div class="product-right product-form-box">
-                            <h4>
-                                <del *ngIf="product.discount && product.discount > 0">{{ product.price * productService.Currency?.price | currency: productService.Currency?.currency:'symbol' }}</del>
+                            <h4 *ngIf="product.discount && product.discount > 0 ">
+                                <del >{{ product.price * productService.Currency?.price | currency: productService.Currency?.currency:'symbol' }}</del>
                                 <span>{{ product.discount }}% off</span>
                             </h4>
                             <h3>
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-buttons">
+                            <div  class="product-buttons">
                                 <a href="javascrip:void(0)" class="btn btn-solid"
                                    [class.disabled]="counter > product.stock"
                                    (click)="addToCart(product)">add to cart</a>
@@ -85,9 +85,11 @@
                                    class="btn btn-solid"
                                    [class.disabled]="counter > product.stock"
                                 >Buy now with Econt</a>
-                                <ng-template *ngIf="auth.user$ | async as user">
+                                <span *ngIf="auth.user$ | async as user">
                                     <a *ngIf="user.admin" class="btn btn-solid" href="shop/product/set/{{product.id}}">Edit product</a>
-                                </ng-template>
+                                    <a *ngIf="user.admin" class="btn btn-solid" (click)="productService.removeProduct(product)">Delete product</a>
+
+                                </span>
 
 
                             </div>
@@ -117,12 +119,12 @@
                     <div class="row">
                         <div class="col-sm-12 col-lg-12">
                             <ngb-tabset [type]="'tabs'" class="nav-material">
-                                <ngb-tab>
-                                    <ng-template ngbTabTitle>Description</ng-template>
-                                    <ng-template ngbTabContent>
-                                        <p>{{ product.description }}</p>
-                                    </ng-template>
-                                </ngb-tab>
+<!--                                <ngb-tab>-->
+<!--                                    <ng-template ngbTabTitle>Description</ng-template>-->
+<!--                                    <ng-template ngbTabContent>-->
+<!--                                        <p>{{ product.description }}</p>-->
+<!--                                    </ng-template>-->
+<!--                                </ngb-tab>-->
 <!--                                <ngb-tab>-->
 <!--                                    <ng-template ngbTabTitle>Video</ng-template>-->
 <!--                                    <ng-template ngbTabContent>-->
