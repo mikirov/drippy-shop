@@ -36,7 +36,6 @@ export class ProductSetComponent implements AfterViewInit {
     firstFormGroup: FormGroup;
     secondFormGroup: FormGroup;
 
-
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
     form = new FormGroup({});
@@ -47,7 +46,7 @@ export class ProductSetComponent implements AfterViewInit {
     collections: string[] = [];
     previewProduct$: Observable<PreviewProduct>;
     product = new Product();
-    variants: BehaviorSubject<Variants[]>;
+    variants: Variants[] = [];
     currentVariant: Variants = {};
 
     uploading = false;
@@ -79,8 +78,8 @@ export class ProductSetComponent implements AfterViewInit {
 
     allCollections: string[] = ['Top products', 'Best sellers', 'Winter', 'Autumn', 'Summer', 'Tops'];
 
-    productNew = false;
-    productSale = false;
+    productNew = true;
+    productSale = true;
 
     variantForm = this.formBuilder.group({
         size: ['M', Validators.required],
@@ -177,7 +176,7 @@ export class ProductSetComponent implements AfterViewInit {
                 this.tags = this.product.tags;
 
                 // push to behavior subject the current variants
-                this.variants.next(this.product.variants);
+                this.variants = this.product.variants;
 
                 this.collections = this.product.collection;
                 this.urlsChanges.next(this.product.urls);
@@ -195,7 +194,7 @@ export class ProductSetComponent implements AfterViewInit {
     }
 
     async uploadProduct() {
-        this.product.variants = await this.variants.toPromise();
+        this.product.variants = this.variants;
         this.uploading = true;
         await this.uploadAllFiles();
         const productId = await this.productService.createProduct(this.product);
@@ -293,11 +292,10 @@ export class ProductSetComponent implements AfterViewInit {
     }
 
     addVariation(color: string, imageIndex: string) {
-        this.currentVariant.size =
-            this.currentVariant.color = color.trim();
+        this.currentVariant.color = color.trim();
         this.currentVariant.image_id = parseInt(imageIndex.trim(), 10);
-        this.variants.next([this.currentVariant]);
-        console.log(this.variants);
+        console.log(this.currentVariant);
+        this.variants.push(this.currentVariant);
         this.currentVariant = {};
         this.variantForm.controls.size.setValue('Universal');
         this.variantForm.controls.color.setValue('');
@@ -306,12 +304,12 @@ export class ProductSetComponent implements AfterViewInit {
 
     setProductNew(checked: boolean) {
         console.log('setProductNew: ' + checked);
-        this.product.new = checked;
+        this.productNew = checked;
     }
 
     setProductSale(checked: boolean) {
         console.log('setProductSale: ' + checked);
-        this.product.sale = checked;
+        this.productSale = checked;
     }
 
     setCollection(event: MatSelectChange) {

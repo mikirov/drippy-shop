@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {map, startWith, delay} from 'rxjs/operators';
+import {BehaviorSubject, Observable, ReplaySubject, Subject} from 'rxjs';
+import {map, startWith, delay, publish, share, tap} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
 import {Product} from '../models/product';
 import {AngularFireStorage} from '@angular/fire/storage';
@@ -19,16 +19,18 @@ const state = {
 })
 export class ProductService {
 
-    // public Currency = { name: 'Dollar', currency: 'USD', price: 1 }; // Default Currency
-    public Currency = {name: 'Лев', currency: 'лв.', price: 1}; // Default Currency
-    public OpenCart = false;
-    public Products;
-
     constructor(private http: HttpClient,
                 private toastrService: ToastrService,
                 private db: AngularFirestore) {
+        this.wishlistItems.next(state.wishlist);
+        this.cartItems.next(state.cart);
+        this.compareItems.next(state.compare);
     }
+    public wishlistItems: ReplaySubject<Product[]> = new ReplaySubject<Product[]>();
 
+    public cartItems: ReplaySubject<Product[]> = new ReplaySubject<Product[]>();
+
+    public compareItems: ReplaySubject<Product[]> = new ReplaySubject<Product[]>();
     /*
       ---------------------------------------------
       ---------------  Product  -------------------
@@ -51,6 +53,45 @@ export class ProductService {
 
     }
 
+    /*
+      ---------------------------------------------
+      ---------------  Wish List  -----------------
+      ---------------------------------------------
+    */
+
+    // Get Wishlist Items
+    // public get wishlistItems(): ReplaySubject<Product[]> {
+    //     const subject = new ReplaySubject<Product[]>();
+    //     subject.next(state.wishlist);
+    //     return subject;
+    // }
+
+    /*
+      ---------------------------------------------
+      -------------  Compare Product  -------------
+      ---------------------------------------------
+    */
+
+    // Get Compare Items
+    // public get compareItems(): ReplaySubject<Product[]> {
+    //     const subject = new ReplaySubject<Product[]>();
+    //     subject.next(state.compare);
+    //     return subject;
+    // }
+
+    // public Currency = { name: 'Dollar', currency: 'USD', price: 1 }; // Default Currency
+    public Currency = {name: 'Лев', currency: 'лв.', price: 1}; // Default Currency
+    public OpenCart = false;
+    public Products;
+
+    /*
+      ---------------------------------------------
+      -----------------  Cart  --------------------
+      ---------------------------------------------
+    */
+
+    // Get Cart Items
+
     // Get Products By Slug
     public getProduct(id: string): Observable<Product> {
         return this.db.doc<Product>(`products/${id}`).valueChanges();
@@ -70,23 +111,6 @@ export class ProductService {
         return key;
     }
 
-    /*
-      ---------------------------------------------
-      ---------------  Wish List  -----------------
-      ---------------------------------------------
-    */
-
-    // Get Wishlist Items
-    public get wishlistItems(): Observable<Product[]> {
-        // return this.db.collection<Product>('wishlist').valueChanges();
-        const itemsStream = new Observable(observer => {
-            observer.next(state.wishlist);
-            observer.complete();
-        });
-        return itemsStream as Observable<Product[]>;
-
-    }
-
     // Add to Wishlist
     public addToWishlist(product): any {
         // console.log('creating wishlist item');
@@ -104,6 +128,7 @@ export class ProductService {
         }
         this.toastrService.success('Product has been added in wishlist.');
         localStorage.setItem('wishlistItems', JSON.stringify(state.wishlist));
+        this.wishlistItems.next(state.wishlist);
         return true;
     }
 
@@ -112,23 +137,9 @@ export class ProductService {
         // this.db.doc<Product>(`/wishlist/${product.id}`).delete();
         const index = state.wishlist.indexOf(product);
         state.wishlist.splice(index, 1);
-        localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+        localStorage.setItem('wishlistItems', JSON.stringify(state.wishlist));
+        this.wishlistItems.next(state.wishlist);
         return true;
-    }
-
-    /*
-      ---------------------------------------------
-      -------------  Compare Product  -------------
-      ---------------------------------------------
-    */
-
-    // Get Compare Items
-    public get compareItems(): Observable<Product[]> {
-        const itemsStream = new Observable(observer => {
-            observer.next(state.compare);
-            observer.complete();
-        });
-        return itemsStream as Observable<Product[]>;
     }
 
     // Add to Compare
@@ -141,6 +152,7 @@ export class ProductService {
         }
         this.toastrService.success('Product has been added in compare.');
         localStorage.setItem('compareItems', JSON.stringify(state.compare));
+        this.compareItems.next(state.compare);
         return true;
     }
 
@@ -149,29 +161,22 @@ export class ProductService {
         const index = state.compare.indexOf(product);
         state.compare.splice(index, 1);
         localStorage.setItem('compareItems', JSON.stringify(state.compare));
+        this.compareItems.next(state.compare);
         return true;
     }
 
-    /*
-      ---------------------------------------------
-      -----------------  Cart  --------------------
-      ---------------------------------------------
-    */
-
-    // Get Cart Items
-    public get cartItems(): Observable<Product[]> {
-        const itemsStream = new Observable(observer => {
-            observer.next(state.cart);
-            observer.complete();
-        });
-        return itemsStream as Observable<Product[]>;
-    }
+    // public get cartItems(): ReplaySubject<Product[]> {
+    //     const subject = new ReplaySubject<Product[]>();
+    //     subject.next(state.cart);
+    //     return subject;
+    // }
 
     // Add to Cart
     public addToCart(product): any {
         const cartItem = state.cart.find(item => item.id === product.id);
-        const qty = product.quantity ? product.quantity : 1;
+        // const qty = product.quantity ? product.quantity : 1;
         const items = cartItem ? cartItem : product;
+        const qty = cartItem ? cartItem.quantity + product.quantity : product.quantity;
         const stock = this.calculateStockCounts(items, qty);
 
         if (!stock) {
@@ -179,7 +184,7 @@ export class ProductService {
         }
 
         if (cartItem) {
-            cartItem.quantity += qty;
+            cartItem.quantity += 1;
         } else {
             state.cart.push({
                 ...product,
@@ -189,6 +194,7 @@ export class ProductService {
 
         this.OpenCart = true; // If we use cart variation modal
         localStorage.setItem('cartItems', JSON.stringify(state.cart));
+        this.cartItems.pipe(tap(state.cart));
         return true;
     }
 
@@ -197,11 +203,12 @@ export class ProductService {
         return state.cart.find((items, index) => {
             if (items.id === product.id) {
                 const qty = state.cart[index].quantity + quantity;
-                const stock = this.calculateStockCounts(state.cart[index], quantity);
+                const stock = this.calculateStockCounts(state.cart[index], qty);
                 if (qty !== 0 && stock) {
                     state.cart[index].quantity = qty;
                 }
                 localStorage.setItem('cartItems', JSON.stringify(state.cart));
+                this.cartItems.next(state.cart);
                 return true;
             }
         });
@@ -209,9 +216,8 @@ export class ProductService {
 
     // Calculate Stock Counts
     public calculateStockCounts(product, quantity) {
-        const qty = product.quantity + quantity;
         const stock = product.stock;
-        if (stock < qty || stock === 0) {
+        if (stock < quantity || stock === 0) {
             this.toastrService.error('You can not add more items than available. In stock ' + stock + ' items.');
             return false;
         }
@@ -223,6 +229,7 @@ export class ProductService {
         const index = state.cart.indexOf(product);
         state.cart.splice(index, 1);
         localStorage.setItem('cartItems', JSON.stringify(state.cart));
+        this.cartItems.next(state.cart);
         return true;
     }
 
@@ -406,4 +413,7 @@ export class ProductService {
 //     return this.db.doc<Product>(`/products/${product.id}`).delete();
 //   }
 
+    removeProduct(product: Product) {
+        return this.db.doc<Product>(`/products/${product.id}`).delete();
+    }
 }

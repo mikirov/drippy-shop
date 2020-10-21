@@ -15,6 +15,7 @@ export class Product implements PreviewProduct{
         this.urls = [];
         this.variants = [];
         this.collection = [];
+        this.archived = false;
     }
     id: string;
     name: string;
@@ -31,7 +32,7 @@ export class Product implements PreviewProduct{
     quantity?: number; // done
     tags?: any[]; // done
     variants?: Variants[];
-    archived?: boolean;
+    archived: boolean;
 }
 
 export class WishlistProduct extends Product{

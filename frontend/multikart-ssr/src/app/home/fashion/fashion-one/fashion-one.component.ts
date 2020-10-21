@@ -22,7 +22,9 @@ export class FashionOneComponent implements OnInit {
             // this.products = response.filter(item => item.type === 'fashion');
             this.products = response;
             // Get Product Collection
-            console.log(response)
+            // console.log(response);
+
+            this.products = this.products.filter(item => item.stock > 0);
             this.products.filter((item) => {
                 item.collection.filter((collection) => {
                     const index = this.productCollections.indexOf(collection);

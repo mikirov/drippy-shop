@@ -83,5 +83,18 @@
   "FAQ": "FAQ",
   "blog-details": "blog details",
   "my-account": "My account",
-  "special-offer": "special offer"
+  "special-offer": "special offer",
+  "continue-shopping": "continue shopping",
+  "total-price": "total price",
+  "image": "image",
+  "product-name": "product name",
+  "price": "price",
+  "quantity": "quantity",
+  "action": "action",
+  "availability": "availability",
+  "description": "description",
+  "compare-empty": "Compare List is Empty",
+  "cart-empty": "Your cart is empty",
+  "add-to-cart-happy": "Add something to make me happy :)",
+  "add-compare": "Explore more shortlist some items."
 }

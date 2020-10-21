@@ -15,13 +15,14 @@ import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-d
     styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-    url = 'https://delivery.econt.com/customer_info.php';
+
+    public url = 'https://delivery.econt.com/customer_info.php';
 
     constructor(public dialogRef: MatDialogRef<CheckoutComponent>,
                 @Inject(MAT_DIALOG_DATA) public data, private orderService: OrderService,
-                private auth: AuthService, public checkoutService: CheckoutService,
+                private auth: AuthService,
                 private http: HttpClient, private router: Router, private snackBar: MatSnackBar,
-                private dialog: MatDialog,) {
+                private dialog: MatDialog) {
 
     }
 
@@ -29,10 +30,6 @@ export class CheckoutComponent implements OnInit {
     user;
 
     ngOnInit(): void {
-        this.auth.user$.subscribe((user) => {
-            this.user = user;
-        });
-        console.log(this.data.products);
     }
 
     @HostListener('window:message', ['$event'])
@@ -47,53 +44,50 @@ export class CheckoutComponent implements OnInit {
             alert(eventData.shipment_error);
             return;
         }
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-        const result = await dialogRef.afterClosed().toPromise();
-        console.log(result);
-        if (!result) {
-            return;
-        }
-        this.dialogRef.close();
+        const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+        confirmationDialogRef.afterClosed().subscribe(async (result) => {
+            console.log(result);
+            if (result === 'success') {
+                const payload = {
+                    id: '',
+                    orderNumber: '',
+                    status: '',
+                    orderTime: '',
+                    partialDelivery: 0,
+                    currency: environment.SHOP_CURRENCY,
+                    shipmentDescription: 'дрехи',
+                    shipmentNubmer: '',
+                    customerInfo: eventData,
+                    items: []
+                };
+                this.data.products.forEach(product => {
+                    payload.items.push({
+                        name: product.name, // Име на продукта
+                        SKU: product.id, // Код на продукта (опционално)
+                        URL: 'http://www.drippy.shop/shop/product/' + product.id, // адрес на продукта в магазина (опционално)
+                        imageURL: product.urls[0], // адрес картинка на продукта (опционално)
+                        count: 1, // закупени бройки (по избор, 1 по подразбиране)
+                        hideCount: 1, // приема стойности 0 и 1. Служи за скриване на формата за промяна на количество.
+                        totalWeight: 0.5, // общо тегло (тегло * брой)
+                        totalPrice: product.price - (product.price * product.discount) / 100  // обща цена (ед. цена * брой)
+                    });
+                });
 
-        const payload = {
-            id: '',
-            orderNumber: '',
-            status: '',
-            orderTime: '',
-            partialDelivery: 0,
-            currency: environment.SHOP_CURRENCY,
-            shipmentDescription: 'дрехи',
-            shipmentNubmer: '',
-            customerInfo: eventData,
-            items: []
-        };
-        this.data.products.forEach(product => {
-            payload.items.push({
-                name: product.name, // Име на продукта
-                SKU: product.id, // Код на продукта (опционално)
-                URL: 'http://www.drippy.shop/shop/product/' + product.id, // адрес на продукта в магазина (опционално)
-                imageURL: product.urls[0], // адрес картинка на продукта (опционално)
-                count: 1, // закупени бройки (по избор, 1 по подразбиране)
-                hideCount: 1, // приема стойности 0 и 1. Служи за скриване на формата за промяна на количество.
-                totalWeight: 0.5, // общо тегло (тегло * брой)
-                totalPrice: product.price  // обща цена (ед. цена * брой)
-            });
+                const httpOptions = {
+                    headers: new HttpHeaders(
+                        {
+                            'Content-Type': 'application/json',
+                            Authorization: environment.PRIVATE_KEY
+                        })
+                };
+                await this.http.post(environment.UPDATE_ORDER_ENDPOINT, payload, httpOptions).toPromise();
+
+                const orderId = await this.orderService.create(this.data.products.map((product) => product.id));
+                console.log('Created order with id:' + orderId);
+                this.snackBar.open('Order successfully created', 'Okay');
+                this.dialogRef.close('success');
+            }
         });
-
-        const httpOptions = {
-            headers: new HttpHeaders(
-                {
-                    'Content-Type': 'application/json',
-                    Authorization: environment.PRIVATE_KEY
-                })
-        };
-        await this.http.post(environment.UPDATE_ORDER_ENDPOINT, payload, httpOptions).toPromise();
-        // TODO: create order
-
-        const orderId = await this.orderService.create(this.data.products.map((product) => product.id), this.user);
-        console.log('Created order with id:' + orderId);
-         this.snackBar.open('Order successfully created', 'Okay');
-        // this.dialogRef.close();
 
     }
 

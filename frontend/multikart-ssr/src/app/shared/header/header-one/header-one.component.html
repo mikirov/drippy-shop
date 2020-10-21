@@ -27,7 +27,7 @@
                         <ng-template #guest>
                             <li>
                                 <a (click)="auth.googleSignin()">
-                                    Login <i  class="fa fa-google"></i>
+                                    {{"login" | translate}} <i  class="fa fa-google"></i>
                                 </a>
 
                             </li>
@@ -65,12 +65,12 @@
             <div class="col-sm-12">
                 <div class="main-menu">
                     <div class="menu-left">
-                        <app-left-menu></app-left-menu>
-                        <div class="brand-logo">
+<!--                        <app-left-menu></app-left-menu>-->
+<!--                        <div class="brand-logo">-->
                             <a routerLink="/home/" id="headerlogo">
                                 <img [src]="themeLogo" class="img-fluid" alt="logo">
                             </a>
-                        </div>
+<!--                        </div>-->
                     </div>
                     <div class="menu-right pull-right">
                         <div>

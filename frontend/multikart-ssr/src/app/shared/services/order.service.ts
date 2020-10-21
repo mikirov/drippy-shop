@@ -12,12 +12,11 @@ export class OrderService {
     constructor(private db: AngularFirestore) {
     }
 
-    async create(productIds: string[], user: User) {
+    async create(productIds: string[]) {
         const orderId = this.db.createId();
         const order: Order = {
             orderId,
             productIds,
-            userId: user.uid
         };
 
         const documentReference = this.db.doc<Order>(`/orders/${orderId}`);
