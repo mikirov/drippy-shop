@@ -1,6 +1,6 @@
 import {Component, OnInit, Injectable, PLATFORM_ID, Inject} from '@angular/core';
 import {isPlatformBrowser} from '@angular/common';
-import {Observable} from 'rxjs';
+import {combineLatest, Observable} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {ProductService} from '../../services/product.service';
 import {Product} from '../../models/product';
@@ -46,7 +46,29 @@ export class SettingsComponent implements OnInit {
     constructor(@Inject(PLATFORM_ID) private platformId: Object,
                 private translate: TranslateService,
                 public productService: ProductService, public dialog: MatDialog) {
-        this.productService.cartItems.subscribe(response => this.products = response);
+        // this.productService.cartItems.subscribe(response => this.products = response);
+        combineLatest(this.productService.getProducts, this.productService.cartItems)
+            .subscribe(([allProducts, cartItems]) => {
+                // const availableProducts = result[0];
+                // const cartItems = result[1];
+                // console.log(availableProducts);
+                // console.log(cartItems);
+                this.products = cartItems.filter(p => {
+                    if (p.stock === 0 || p.archived) {
+                        return false;
+                    }
+                    for (const ap of allProducts) {
+                        if (p.id === ap.id) {
+                            if (ap.stock === 0 || ap.archived) {
+                                return false;
+                            }
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+                console.log(this.products);
+            });
         translate.setDefaultLang('en');
     }
 

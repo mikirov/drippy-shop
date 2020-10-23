@@ -42,7 +42,7 @@
                                 <h6 class="product-title size-text" *ngIf="product.variants.length && Size(product.variants).length">
                                     select size
                                     <span>
-                              <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size chart</a>
+<!--                              <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size chart</a>-->
                             </span>
                                 </h6>
                                 <div class="size-box" *ngIf="product.variants.length && Size(product.variants).length">
@@ -191,6 +191,6 @@
             </div>
         </div>
     </section>
-    <app-size-modal #sizeChart [product]="product"></app-size-modal>
+<!--    <app-size-modal #sizeChart [product]="product"></app-size-modal>-->
     <!-- Section ends -->
 </div>

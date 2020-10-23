@@ -9,13 +9,18 @@ export const updateProductStock = functions.firestore
     .document('orders/{orderId}')
     .onCreate(async (snap : any, context: any) => {
         const order = snap.data();
-        const productIds = order.productIds;
-        for (const productId of productIds) {
-            const productRef = db.doc(`products/${productId}`);
+        const products = order.products;
+        for (const product of products) {
+            const productRef = db.doc(`products/${product.id}`);
             const productSnap = await productRef.get();
             const productData = productSnap.data();
-            if(productData.stock === 0){
+            if(productData.stock === 1){
                 await productRef.delete();
+            }
+            else {
+                await productRef.update({
+                    stock: productData.stock - 1
+                });
             }
         }
     });

@@ -14,11 +14,11 @@
                 <li *ngFor="let product of products">
                     <div class="media">
                         <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
-                            <img class="mr-3" [src]="product.urls[0]" [alt]="product.images[0].alt">
+                            <img class="mr-3" [src]="product.urls[0]" [alt]="">
                         </a>
                         <div class="media-body">
-                            <a [routerLink]="['/shop/product/left/sidebar/', product.name.replace(' ', '-')]">
-                                <h4>{{ product?.name | titlecase }}</h4>
+                            <a [routerLink]="['/shop/product/left/sidebar/', product.id]">
+                                <h4>{{ product.name | titlecase }}</h4>
                             </a>
                             <h4>
                                 <span>
@@ -47,7 +47,7 @@
                 <li>
                     <div class="buttons">
                         <a [routerLink]="['/shop/cart']" class="btn btn-solid btn-xs view-cart">view cart</a>
-                        <a [routerLink]="['/shop/checkout']" class="btn btn-solid btn-xs checkout">checkout</a>
+<!--                        <a [routerLink]="['/shop/checkout']" class="btn btn-solid btn-xs checkout">checkout</a>-->
                     </div>
                 </li>
             </ul>

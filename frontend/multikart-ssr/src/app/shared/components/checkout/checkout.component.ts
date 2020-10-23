@@ -47,53 +47,53 @@ export class CheckoutComponent implements OnInit {
             alert(eventData.shipment_error);
             return;
         }
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-        const result = await dialogRef.afterClosed().toPromise();
-        console.log(result);
-        if (!result) {
-            return;
-        }
-        this.dialogRef.close();
+        this.dialog.open(ConfirmationDialogComponent)
+            .afterClosed().subscribe(async (result) => {
+            if (result === 'success') {
+                this.dialogRef.close('success');
+                const payload = {
+                    id: '',
+                    orderNumber: '',
+                    status: '',
+                    orderTime: '',
+                    partialDelivery: 0,
+                    currency: environment.SHOP_CURRENCY,
+                    shipmentDescription: 'дрехи',
+                    shipmentNubmer: '',
+                    customerInfo: eventData,
+                    items: []
+                };
+                this.data.products.forEach(product => {
+                    payload.items.push({
+                        name: product.name, // Име на продукта
+                        SKU: product.id, // Код на продукта (опционално)
+                        URL: 'http://www.drippy.shop/shop/product/' + product.id, // адрес на продукта в магазина (опционално)
+                        imageURL: product.urls[0], // адрес картинка на продукта (опционално)
+                        count: 1, // закупени бройки (по избор, 1 по подразбиране)
+                        hideCount: 1, // приема стойности 0 и 1. Служи за скриване на формата за промяна на количество.
+                        totalWeight: 0.5, // общо тегло (тегло * брой)
+                        totalPrice: product.price  // обща цена (ед. цена * брой)
+                    });
+                });
 
-        const payload = {
-            id: '',
-            orderNumber: '',
-            status: '',
-            orderTime: '',
-            partialDelivery: 0,
-            currency: environment.SHOP_CURRENCY,
-            shipmentDescription: 'дрехи',
-            shipmentNubmer: '',
-            customerInfo: eventData,
-            items: []
-        };
-        this.data.products.forEach(product => {
-            payload.items.push({
-                name: product.name, // Име на продукта
-                SKU: product.id, // Код на продукта (опционално)
-                URL: 'http://www.drippy.shop/shop/product/' + product.id, // адрес на продукта в магазина (опционално)
-                imageURL: product.urls[0], // адрес картинка на продукта (опционално)
-                count: 1, // закупени бройки (по избор, 1 по подразбиране)
-                hideCount: 1, // приема стойности 0 и 1. Служи за скриване на формата за промяна на количество.
-                totalWeight: 0.5, // общо тегло (тегло * брой)
-                totalPrice: product.price  // обща цена (ед. цена * брой)
-            });
+                const httpOptions = {
+                    headers: new HttpHeaders(
+                        {
+                            'Content-Type': 'application/json',
+                            Authorization: environment.PRIVATE_KEY
+                        })
+                };
+                await this.http.post(environment.UPDATE_ORDER_ENDPOINT, payload, httpOptions).toPromise();
+                // TODO: create order
+
+                const orderId = await this.orderService.create(this.data.products, eventData);
+                console.log('Created order with id:' + orderId);
+                this.snackBar.open('Order successfully created', 'Okay');
+
+            }
+
         });
 
-        const httpOptions = {
-            headers: new HttpHeaders(
-                {
-                    'Content-Type': 'application/json',
-                    Authorization: environment.PRIVATE_KEY
-                })
-        };
-        await this.http.post(environment.UPDATE_ORDER_ENDPOINT, payload, httpOptions).toPromise();
-        // TODO: create order
-
-        const orderId = await this.orderService.create(this.data.products.map((product) => product.id), this.user);
-        console.log('Created order with id:' + orderId);
-        this.snackBar.open('Order successfully created', 'Okay');
-        // this.dialogRef.close();
 
     }
 

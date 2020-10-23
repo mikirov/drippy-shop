@@ -146,6 +146,11 @@ export class ThreeColumnComponent {
             data: {
                 products
             }
+        }).afterClosed().subscribe((result) => {
+            if (result === 'success') {
+                this.productService.removeCartItem(this.product);
+                this.router.navigateByUrl('/home', {skipLocationChange: true});
+            }
         });
     }
 }
